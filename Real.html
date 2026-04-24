@@ -1,0 +1,4837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenfield Public School — Excellence Since 1975</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #2d6a4f;
+            --navy2: #1b4332;
+            --gold: #e07a5f;
+            --gold2: #f4a261;
+            --cream: #fef6e4;
+            --white: #fffdf7;
+            --gray: #7c6d5e;
+            --gray-light: #f0ebe0;
+            --red: #c1440e;
+            --green: #52796f;
+            --teal: #457b9d;
+            --shadow: 0 4px 24px rgba(45, 106, 79, .10);
+            --shadow-lg: 0 12px 48px rgba(45, 106, 79, .18);
+            --r: 14px;
+            --font-d: 'Playfair Display', serif;
+            --font-b: 'DM Sans', sans-serif;
+            --font-hi: 'Noto Sans Devanagari', sans-serif;
+            --font-te: 'Noto Sans Telugu', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--font-b);
+            background: #fef6e4;
+            color: #2d3a2e;
+            line-height: 1.65
+        }
+
+        body.lang-hi {
+            font-family: var(--font-hi)
+        }
+
+        body.lang-te {
+            font-family: var(--font-te)
+        }
+
+        body.lang-hi h1,
+        body.lang-hi h2,
+        body.lang-hi h3 {
+            font-family: var(--font-hi)
+        }
+
+        body.lang-te h1,
+        body.lang-te h2,
+        body.lang-te h3 {
+            font-family: var(--font-te)
+        }
+
+        /* ── LANGUAGE BAR ── */
+        .lang-bar {
+            background: #f5ede0;
+            border-bottom: 1px solid #ddd0b8;
+            padding: .35rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: .5rem;
+            font-size: .78rem;
+            position: relative;
+            z-index: 900
+        }
+
+        .lang-bar span {
+            color: var(--gray);
+            font-weight: 500;
+            margin-right: .25rem
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1.5px solid #ccc;
+            border-radius: 5px;
+            padding: .25rem .75rem;
+            font-size: .78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .18s;
+            color: var(--navy);
+            font-family: inherit
+        }
+
+        .lang-btn.active {
+            background: var(--navy);
+            color: var(--gold);
+            border-color: var(--navy)
+        }
+
+        /* ── FLOATING QUICK-ACCESS TOOLBAR ── */
+        .fab-bar {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .fab {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .25);
+            transition: all .2s;
+            border: none;
+            text-decoration: none;
+            position: relative
+        }
+
+        .fab:hover {
+            transform: scale(1.12) translateX(-4px)
+        }
+
+        .fab::before {
+            content: attr(data-tip);
+            position: absolute;
+            right: 58px;
+            background: var(--navy);
+            color: #fff;
+            font-size: .72rem;
+            font-weight: 600;
+            padding: .3rem .7rem;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s;
+            font-family: var(--font-b)
+        }
+
+        .fab:hover::before {
+            opacity: 1
+        }
+
+        .fab-admit {
+            background: var(--gold);
+            color: var(--navy)
+        }
+
+        .fab-notice {
+            background: var(--red);
+            color: #fff
+        }
+
+        .fab-phone {
+            background: var(--green);
+            color: #fff
+        }
+
+        .fab-top {
+            background: var(--navy);
+            color: var(--gold)
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--navy);
+            position: sticky;
+            top: 0;
+            z-index: 800;
+            box-shadow: 0 2px 20px rgba(27, 67, 50, .35)
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 66px
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0
+        }
+
+        .logo-text {
+            font-family: var(--font-d);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.2
+        }
+
+        .logo-sub {
+            display: block;
+            font-family: var(--font-b);
+            color: var(--gold);
+            font-size: .68rem;
+            letter-spacing: .06em
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, .82);
+            text-decoration: none;
+            font-size: .84rem;
+            font-weight: 500;
+            padding: .5rem .9rem;
+            border-radius: 6px;
+            transition: all .2s;
+            cursor: pointer;
+            display: block
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+            background: rgba(232, 160, 32, .1)
+        }
+
+        .nav-cta {
+            background: var(--gold) !important;
+            color: var(--navy) !important;
+            font-weight: 700 !important;
+            border-radius: 8px !important;
+            padding: .5rem 1.2rem !important
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: .5rem
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all .3s
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            display: none
+        }
+
+        section.active {
+            display: block
+        }
+
+        /* ═══════════════════════════════════
+   HERO SLIDER
+═══════════════════════════════════ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            display: flex;
+            flex-direction: column
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2
+        }
+
+        .slide-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.08);
+            transition: transform 8s ease;
+            will-change: transform
+        }
+
+        .slide.active .slide-bg {
+            transform: scale(1)
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 3;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%
+        }
+
+        .slide-text {
+            max-width: 640px
+        }
+
+        .slide-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(232, 160, 32, .18);
+            border: 1px solid rgba(232, 160, 32, .45);
+            color: var(--gold);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: .38rem .95rem;
+            border-radius: 20px;
+            margin-bottom: 1.4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all .7s .3s
+        }
+
+        .slide.active .slide-badge {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .slide h1 {
+            font-family: var(--font-d);
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all .7s .5s
+        }
+
+        .slide.active h1 {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .slide h1 em {
+            color: var(--gold);
+            font-style: normal
+        }
+
+        .slide-desc {
+            color: rgba(255, 255, 255, .8);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all .7s .7s
+        }
+
+        .slide.active .slide-desc {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .slide-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all .7s .9s
+        }
+
+        .slide.active .slide-btns {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* Slider controls */
+        .slider-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: .6rem;
+            align-items: center
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, .4);
+            cursor: pointer;
+            transition: all .3s;
+            border: none
+        }
+
+        .dot.active {
+            background: var(--gold);
+            width: 28px
+        }
+
+        .slider-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            pointer-events: none
+        }
+
+        .arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .12);
+            border: 2px solid rgba(255, 255, 255, .25);
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all .2s;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px)
+        }
+
+        .arrow:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy)
+        }
+
+        /* Slide-specific overlays */
+        .slide:nth-child(1) .slide-overlay {
+            background: linear-gradient(110deg, rgba(27, 67, 50, .82) 0%, rgba(27, 67, 50, .35) 100%)
+        }
+
+        .slide:nth-child(2) .slide-overlay {
+            background: linear-gradient(110deg, rgba(27, 67, 50, .75) 0%, rgba(82, 121, 111, .3) 100%)
+        }
+
+        .slide:nth-child(3) .slide-overlay {
+            background: linear-gradient(110deg, rgba(29, 53, 87, .85) 0%, rgba(69, 123, 157, .35) 100%)
+        }
+
+        .slide:nth-child(4) .slide-overlay {
+            background: linear-gradient(110deg, rgba(127, 79, 36, .78) 0%, rgba(193, 68, 14, .3) 100%)
+        }
+
+        .slide:nth-child(5) .slide-overlay {
+            background: linear-gradient(110deg, rgba(74, 55, 40, .85) 0%, rgba(139, 94, 60, .35) 100%)
+        }
+
+        /* Hero ticker */
+        .hero-ticker {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            background: var(--gold);
+            color: var(--navy);
+            font-size: .82rem;
+            font-weight: 700;
+            padding: .45rem 0;
+            overflow: hidden;
+            white-space: nowrap
+        }
+
+        .ticker-track {
+            display: inline-flex;
+            animation: ticker 35s linear infinite
+        }
+
+        .ticker-track span {
+            padding: 0 2rem
+        }
+
+        @keyframes ticker {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* Stats bar */
+        .stats-bar {
+            background: #1b4332;
+            padding: 0
+        }
+
+        .stats-bar-inner {
+            max-width: 1280px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr)
+        }
+
+        .stat-item {
+            padding: 1.4rem 1.5rem;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, .1);
+            transition: background .2s;
+            cursor: default
+        }
+
+        .stat-item:last-child {
+            border-right: none
+        }
+
+        .stat-item:hover {
+            background: rgba(232, 160, 32, .08)
+        }
+
+        .stat-num {
+            font-family: var(--font-d);
+            font-size: 2rem;
+            font-weight: 900;
+            color: #f4c89e;
+            line-height: 1;
+            display: block
+        }
+
+        .stat-lbl {
+            color: rgba(220, 240, 228, .75);
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            margin-top: .25rem;
+            display: block
+        }
+
+        /* Quick links */
+        .quick-links {
+            background: #fff;
+            border-bottom: 1px solid #e8e0cf
+        }
+
+        .ql-grid {
+            max-width: 1280px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr)
+        }
+
+        .ql-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .5rem;
+            padding: 1.25rem .8rem;
+            cursor: pointer;
+            border-right: 1px solid #e8e0cf;
+            transition: all .2s;
+            text-decoration: none;
+            color: var(--navy)
+        }
+
+        .ql-item:last-child {
+            border-right: none
+        }
+
+        .ql-item:hover {
+            background: var(--cream)
+        }
+
+        .ql-item:hover .ql-icon {
+            background: var(--gold);
+            color: var(--navy)
+        }
+
+        .ql-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--navy);
+            color: var(--gold);
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all .2s
+        }
+
+        .ql-lbl {
+            font-size: .78rem;
+            font-weight: 600;
+            text-align: center
+        }
+
+        /* ANNOUNCEMENT STRIP */
+        .ann-strip {
+            background: #c1440e;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: .7rem 2rem;
+            overflow: hidden
+        }
+
+        .ann-strip .tag {
+            background: rgba(255, 255, 255, .2);
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: .2rem .65rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0
+        }
+
+        .ann-strip p {
+            font-size: .85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .ann-strip strong {
+            color: var(--gold2)
+        }
+
+        /* ── PAGE WRAPPER ── */
+        .page-section {
+            max-width: 1280px;
+            margin: auto;
+            padding: 4.5rem 2rem
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(45, 106, 79, .08);
+            color: var(--navy);
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding: .3rem .85rem;
+            border-radius: 20px;
+            margin-bottom: .75rem;
+            border-left: 3px solid var(--gold)
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem
+        }
+
+        .section-header h2 {
+            font-family: var(--font-d);
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.2
+        }
+
+        .section-header p {
+            color: var(--gray);
+            margin-top: .5rem;
+            font-size: .97rem
+        }
+
+        /* ── NEWS CARDS ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem
+        }
+
+        .card {
+            background: #fff;
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all .25s;
+            border: 1px solid rgba(45, 106, 79, .06)
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg)
+        }
+
+        .card-img {
+            height: 168px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--navy), #52796f)
+        }
+
+        .card-body {
+            padding: 1.3rem
+        }
+
+        .card-tag {
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--gold);
+            margin-bottom: .4rem
+        }
+
+        .card h3 {
+            font-family: var(--font-d);
+            font-size: 1.08rem;
+            font-weight: 700;
+            margin-bottom: .4rem;
+            line-height: 1.3
+        }
+
+        .card p {
+            font-size: .85rem;
+            color: var(--gray);
+            line-height: 1.6
+        }
+
+        .card-footer {
+            padding: .85rem 1.3rem;
+            border-top: 1px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: .79rem;
+            color: var(--gray)
+        }
+
+        /* ═══════════════════════════════════
+   WHY CHOOSE US — Horizontal Scroll
+═══════════════════════════════════ */
+        .why-section {
+            background: #1b4332;
+            overflow: hidden;
+            padding: 4rem 0
+        }
+
+        .why-header {
+            max-width: 1280px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem
+        }
+
+        .why-header h2 {
+            font-family: var(--font-d);
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            font-weight: 700;
+            color: #fff
+        }
+
+        .why-header p {
+            color: rgba(232, 245, 238, .65);
+            font-size: .95rem;
+            margin-top: .4rem
+        }
+
+        .why-scroll-wrapper {
+            overflow-x: auto;
+            padding: 0 2rem 1.5rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) rgba(255, 255, 255, .15);
+            cursor: grab
+        }
+
+        .why-scroll-wrapper:active {
+            cursor: grabbing
+        }
+
+        .why-track {
+            display: flex;
+            gap: 1.25rem;
+            width: max-content
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: var(--r);
+            padding: 2rem 1.75rem;
+            width: 260px;
+            flex-shrink: 0;
+            transition: all .2s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform .3s;
+            transform-origin: left
+        }
+
+        .why-card:hover {
+            background: rgba(255, 255, 255, .11);
+            border-color: rgba(232, 160, 32, .3)
+        }
+
+        .why-card:hover::before {
+            transform: scaleX(1)
+        }
+
+        .why-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem
+        }
+
+        .why-card h4 {
+            font-family: var(--font-d);
+            color: #e8f5ee;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: .6rem
+        }
+
+        .why-card p {
+            color: rgba(220, 240, 228, .75);
+            font-size: .84rem;
+            line-height: 1.65
+        }
+
+        /* ═══════════════════════════════════
+   TESTIMONIALS — Vertical Slider
+═══════════════════════════════════ */
+        .test-section {
+            background: linear-gradient(135deg, #fef0e6 0%, #fffdf7 60%)
+        }
+
+        .test-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center
+        }
+
+        .test-left h2 {
+            font-family: var(--font-d);
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: .75rem;
+            line-height: 1.2
+        }
+
+        .test-left p {
+            color: var(--gray);
+            font-size: .97rem;
+            line-height: 1.75;
+            margin-bottom: 1.5rem
+        }
+
+        .test-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem
+        }
+
+        .ts {
+            background: var(--navy2);
+            border-radius: var(--r);
+            padding: 1.25rem;
+            text-align: center
+        }
+
+        .ts .n {
+            font-family: var(--font-d);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #f4c89e
+        }
+
+        .ts .l {
+            color: rgba(220, 240, 228, .7);
+            font-size: .75rem;
+            margin-top: .2rem
+        }
+
+        .test-slider {
+            position: relative;
+            overflow: hidden;
+            height: 320px
+        }
+
+        .test-card {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all .6s;
+            background: #fff;
+            border-radius: var(--r);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(45, 106, 79, .06)
+        }
+
+        .test-card.active {
+            opacity: 1;
+            transform: translateY(0);
+            position: relative
+        }
+
+        .test-card.leaving {
+            opacity: 0;
+            transform: translateY(-30px)
+        }
+
+        .quote-mark {
+            font-size: 3rem;
+            color: var(--gold);
+            line-height: .8;
+            font-family: var(--font-d);
+            margin-bottom: .75rem
+        }
+
+        .test-card p {
+            color: var(--navy);
+            font-size: .97rem;
+            line-height: 1.75;
+            font-style: italic;
+            margin-bottom: 1.25rem
+        }
+
+        .test-author {
+            display: flex;
+            align-items: center;
+            gap: .85rem
+        }
+
+        .test-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--navy), #52796f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            border: 3px solid var(--gold)
+        }
+
+        .test-name {
+            font-weight: 700;
+            font-size: .92rem
+        }
+
+        .test-role {
+            font-size: .78rem;
+            color: var(--gold);
+            font-weight: 600
+        }
+
+        .test-dots {
+            display: flex;
+            gap: .5rem;
+            margin-top: 1rem
+        }
+
+        .t-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background: #d0d0e0;
+            cursor: pointer;
+            transition: all .3s;
+            border: none
+        }
+
+        .t-dot.active {
+            background: var(--gold);
+            width: 20px
+        }
+
+        /* ═══════════════════════════════════
+   ANIMATED COUNTER STRIP
+═══════════════════════════════════ */
+        .counter-strip {
+            background: linear-gradient(135deg, #e07a5f 0%, #f4a261 100%);
+            padding: 3.5rem 2rem
+        }
+
+        .counter-grid {
+            max-width: 1280px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.5rem;
+            text-align: center
+        }
+
+        .counter-item .num {
+            font-family: var(--font-d);
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1
+        }
+
+        .counter-item .suffix {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy)
+        }
+
+        .counter-item .lbl {
+            color: rgba(60, 30, 10, .65);
+            font-size: .75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            margin-top: .35rem
+        }
+
+        /* ═══════════════════════════════════
+   STUDENT SPOTLIGHT
+═══════════════════════════════════ */
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 1.5rem
+        }
+
+        .spotlight-main {
+            background: var(--navy2);
+            border-radius: var(--r);
+            padding: 2.5rem;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            grid-row: span 2
+        }
+
+        .spotlight-main::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(232, 160, 32, .12)
+        }
+
+        .spotlight-main::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .04)
+        }
+
+        .spotlight-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy);
+            font-size: .7rem;
+            font-weight: 700;
+            padding: .25rem .7rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem
+        }
+
+        .spotlight-main h3 {
+            font-family: var(--font-d);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: .5rem;
+            position: relative;
+            z-index: 1
+        }
+
+        .spotlight-main .role {
+            color: var(--gold);
+            font-size: .85rem;
+            font-weight: 600;
+            margin-bottom: 1rem
+        }
+
+        .spotlight-main p {
+            color: rgba(220, 240, 228, .85);
+            font-size: .9rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1
+        }
+
+        .spotlight-avatar {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: block
+        }
+
+        .spot-card {
+            background: #fff;
+            border-radius: var(--r);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, .06);
+            transition: all .2s
+        }
+
+        .spot-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg)
+        }
+
+        .spot-card .emoji {
+            font-size: 2rem;
+            margin-bottom: .65rem
+        }
+
+        .spot-card h4 {
+            font-weight: 700;
+            font-size: .92rem;
+            margin-bottom: .2rem
+        }
+
+        .spot-card .grade {
+            font-size: .75rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: .5rem
+        }
+
+        .spot-card p {
+            font-size: .82rem;
+            color: var(--gray);
+            line-height: 1.55
+        }
+
+        /* ═══════════════════════════════════
+   EVENTS CALENDAR WIDGET
+═══════════════════════════════════ */
+        .cal-section {
+            background: #fef0e0
+        }
+
+        .cal-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2.5rem;
+            align-items: start
+        }
+
+        .cal-widget {
+            background: #fff;
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid rgba(45, 106, 79, .06)
+        }
+
+        .cal-header {
+            background: var(--navy);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .cal-header h3 {
+            font-family: var(--font-d);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700
+        }
+
+        .cal-nav {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: .9rem;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .cal-nav:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy)
+        }
+
+        .cal-days-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: rgba(13, 27, 62, .04);
+            padding: .5rem
+        }
+
+        .cal-days-header span {
+            text-align: center;
+            font-size: .7rem;
+            font-weight: 700;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: .05em
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: .5rem;
+            gap: 2px
+        }
+
+        .cal-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: .82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .18s;
+            position: relative
+        }
+
+        .cal-cell:hover {
+            background: var(--cream)
+        }
+
+        .cal-cell.today {
+            background: var(--gold);
+            color: var(--navy);
+            font-weight: 700
+        }
+
+        .cal-cell.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--red)
+        }
+
+        .cal-cell.today.has-event::after {
+            background: var(--navy)
+        }
+
+        .cal-cell.other-month {
+            color: #c0c0d0
+        }
+
+        .event-list-sidebar {
+            background: #fff;
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, .06);
+            overflow: hidden
+        }
+
+        .el-header {
+            background: var(--gold);
+            padding: 1rem 1.3rem
+        }
+
+        .el-header h3 {
+            font-family: var(--font-d);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--navy)
+        }
+
+        .el-item {
+            display: flex;
+            gap: .85rem;
+            align-items: flex-start;
+            padding: 1rem 1.3rem;
+            border-bottom: 1px solid var(--gray-light)
+        }
+
+        .el-item:last-child {
+            border-bottom: none
+        }
+
+        .el-date {
+            background: var(--navy);
+            color: #fff;
+            border-radius: 8px;
+            padding: .4rem .6rem;
+            text-align: center;
+            min-width: 46px;
+            flex-shrink: 0
+        }
+
+        .el-date .day {
+            font-family: var(--font-d);
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1
+        }
+
+        .el-date .mon {
+            font-size: .62rem;
+            text-transform: uppercase;
+            color: var(--gold)
+        }
+
+        .el-info h4 {
+            font-weight: 700;
+            font-size: .85rem;
+            margin-bottom: .18rem
+        }
+
+        .el-info p {
+            font-size: .76rem;
+            color: var(--gray)
+        }
+
+        /* ═══════════════════════════════════
+   ALUMNI SECTION
+═══════════════════════════════════ */
+        .alumni-section {
+            background: #1b4332;
+            padding: 5rem 2rem
+        }
+
+        .alumni-inner {
+            max-width: 1280px;
+            margin: auto
+        }
+
+        .alumni-header h2 {
+            font-family: var(--font-d);
+            color: #e8f5ee;
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: .5rem
+        }
+
+        .alumni-header p {
+            color: rgba(232, 245, 238, .65);
+            margin-bottom: 2.5rem
+        }
+
+        .alumni-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.25rem
+        }
+
+        .alumni-card {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: var(--r);
+            padding: 1.75rem 1.25rem;
+            text-align: center;
+            transition: all .2s;
+            cursor: pointer
+        }
+
+        .alumni-card:hover {
+            background: rgba(255, 255, 255, .1);
+            border-color: rgba(232, 160, 32, .4);
+            transform: translateY(-3px)
+        }
+
+        .alumni-emoji {
+            font-size: 2.8rem;
+            margin-bottom: .85rem
+        }
+
+        .alumni-card h4 {
+            color: #e8f5ee;
+            font-weight: 700;
+            font-size: .95rem;
+            margin-bottom: .2rem
+        }
+
+        .alumni-year {
+            color: var(--gold);
+            font-size: .72rem;
+            font-weight: 700;
+            margin-bottom: .5rem
+        }
+
+        .alumni-card p {
+            color: rgba(220, 240, 228, .7);
+            font-size: .8rem;
+            line-height: 1.5
+        }
+
+        .alumni-tag {
+            display: inline-block;
+            background: rgba(232, 160, 32, .15);
+            color: var(--gold);
+            font-size: .68rem;
+            font-weight: 700;
+            padding: .18rem .55rem;
+            border-radius: 4px;
+            margin-top: .5rem
+        }
+
+        /* ═══════════════════════════════════
+   BEFORE / AFTER SLIDER
+═══════════════════════════════════ */
+        .ba-section {
+            background: #fffdf7;
+            padding: 5rem 2rem
+        }
+
+        .ba-inner {
+            max-width: 1200px;
+            margin: auto
+        }
+
+        .ba-section .section-header {
+            margin-bottom: 2rem
+        }
+
+        .ba-container {
+            position: relative;
+            border-radius: var(--r);
+            overflow: hidden;
+            max-width: 900px;
+            margin: auto;
+            box-shadow: var(--shadow-lg);
+            user-select: none
+        }
+
+        .ba-before,
+        .ba-after {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            flex-direction: column;
+            gap: 1rem
+        }
+
+        .ba-before {
+            background: linear-gradient(135deg, #a8a29e, #c7bfb0);
+            z-index: 1;
+            clip-path: inset(0 50% 0 0)
+        }
+
+        .ba-after {
+            background: linear-gradient(135deg, var(--navy), #52796f);
+            z-index: 2
+        }
+
+        .ba-label {
+            font-size: .75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            padding: .3rem .8rem;
+            border-radius: 4px;
+            font-family: var(--font-b)
+        }
+
+        .ba-before .ba-label {
+            background: rgba(0, 0, 0, .4);
+            color: #fff
+        }
+
+        .ba-after .ba-label {
+            background: var(--gold);
+            color: var(--navy)
+        }
+
+        .ba-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            background: var(--gold);
+            z-index: 3;
+            cursor: ew-resize
+        }
+
+        .ba-handle::before,
+        .ba-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%)
+        }
+
+        .ba-handle::before {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 50%;
+            left: -18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .3)
+        }
+
+        .ba-handle-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            color: var(--navy);
+            font-size: 1rem;
+            cursor: ew-resize;
+            pointer-events: none;
+            background: var(--gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .3)
+        }
+
+        .ba-placeholder {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem
+        }
+
+        /* ═══════════════════════════════════
+   ABOUT PAGE
+═══════════════════════════════════ */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+            margin-bottom: 3rem
+        }
+
+        .img-box {
+            height: 380px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--navy), #52796f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative
+        }
+
+        .img-box::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--gold);
+            color: var(--navy);
+            font-weight: 700;
+            font-size: .82rem;
+            padding: .35rem .85rem;
+            border-radius: 6px;
+            font-family: var(--font-b)
+        }
+
+        .about-text h2 {
+            font-family: var(--font-d);
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2
+        }
+
+        .about-text p {
+            color: var(--gray);
+            line-height: 1.75;
+            margin-bottom: .9rem;
+            font-size: .95rem
+        }
+
+        .vm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem
+        }
+
+        .vm-card {
+            background: var(--navy);
+            color: #fff;
+            border-radius: var(--r);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden
+        }
+
+        .vm-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: rgba(232, 160, 32, .15)
+        }
+
+        .vm-card .icon {
+            font-size: 1.8rem;
+            margin-bottom: .9rem
+        }
+
+        .vm-card h3 {
+            font-family: var(--font-d);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: .7rem
+        }
+
+        .vm-card p {
+            font-size: .88rem;
+            color: rgba(255, 255, 255, .78);
+            line-height: 1.65
+        }
+
+        .principal-card {
+            background: #fff;
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 2rem;
+            padding: 2.2rem;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(45, 106, 79, .06)
+        }
+
+        .p-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--navy), #52796f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            flex-shrink: 0;
+            border: 4px solid var(--gold)
+        }
+
+        .p-msg h3 {
+            font-family: var(--font-d);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: .2rem
+        }
+
+        .p-msg .title {
+            color: var(--gold);
+            font-size: .83rem;
+            font-weight: 600;
+            margin-bottom: .9rem
+        }
+
+        .p-msg blockquote {
+            border-left: 4px solid var(--gold);
+            padding-left: 1rem;
+            color: var(--gray);
+            font-size: .92rem;
+            line-height: 1.75;
+            font-style: italic
+        }
+
+        /* ADMISSIONS */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 1.3rem;
+            margin-bottom: 3rem
+        }
+
+        .step-card {
+            background: #fff;
+            border-radius: var(--r);
+            padding: 1.75rem 1.25rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, .06);
+            position: relative
+        }
+
+        .step-card::after {
+            content: '→';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 700
+        }
+
+        .step-card:last-child::after {
+            display: none
+        }
+
+        .step-num {
+            width: 44px;
+            height: 44px;
+            background: var(--gold);
+            color: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-d);
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin: 0 auto .9rem
+        }
+
+        .step-card h4 {
+            font-weight: 700;
+            margin-bottom: .4rem;
+            font-size: .9rem
+        }
+
+        .step-card p {
+            font-size: .82rem;
+            color: var(--gray)
+        }
+
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: var(--r);
+            overflow: hidden;
+            box-shadow: var(--shadow)
+        }
+
+        .fee-table thead {
+            background: var(--navy)
+        }
+
+        .fee-table thead th {
+            color: #fff;
+            padding: .9rem 1.3rem;
+            text-align: left;
+            font-size: .82rem;
+            font-weight: 600
+        }
+
+        .fee-table thead th:first-child {
+            color: var(--gold)
+        }
+
+        .fee-table tbody tr {
+            border-bottom: 1px solid var(--gray-light);
+            transition: background .15s
+        }
+
+        .fee-table tbody tr:hover {
+            background: var(--cream)
+        }
+
+        .fee-table td {
+            padding: .88rem 1.3rem;
+            font-size: .87rem
+        }
+
+        .fee-table td:not(:first-child) {
+            font-weight: 600;
+            color: var(--green)
+        }
+
+        .dl-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem
+        }
+
+        .dl-card {
+            background: #fff;
+            border-radius: var(--r);
+            padding: 1.1rem 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: .9rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, .06);
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .dl-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(232, 160, 32, .2)
+        }
+
+        .dl-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--cream);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0
+        }
+
+        .dl-card h4 {
+            font-size: .87rem;
+            font-weight: 600;
+            margin-bottom: .12rem
+        }
+
+        .dl-card p {
+            font-size: .74rem;
+            color: var(--gray)
+        }
+
+        .dl-btn {
+            margin-left: auto;
+            background: var(--navy);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: .35rem .75rem;
+            font-size: .74rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .2s;
+            white-space: nowrap;
+            font-family: inherit
+        }
+
+        .dl-btn:hover {
+            background: var(--gold);
+            color: var(--navy)
+        }
+
+        /* ACADEMICS */
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+            gap: 1.1rem;
+            margin-bottom: 3rem
+        }
+
+        .dept-card {
+            background: #fff;
+            border-radius: var(--r);
+            padding: 1.5rem 1.1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-bottom: 4px solid var(--gold);
+            transition: all .2s;
+            cursor: pointer
+        }
+
+        .dept-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg)
+        }
+
+        .dept-card .icon {
+            font-size: 2rem;
+            margin-bottom: .6rem
+        }
+
+        .dept-card h4 {
+            font-size: .84rem;
+            font-weight: 700
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+            gap: 1.25rem
+        }
+
+        .fac-card {
+            background: #fff;
+            border-radius: var(--r);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            text-align: center;
+            transition: all .2s;
+            border: 1px solid rgba(45, 106, 79, .06)
+        }
+
+        .fac-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg)
+        }
+
+        .fac-avatar {
+            height: 128px;
+            background: linear-gradient(135deg, var(--navy), #52796f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative
+        }
+
+        .fac-badge {
+            position: absolute;
+            bottom: .6rem;
+            right: .6rem;
+            background: #52796f;
+            color: #e8f5ee;
+            font-size: .62rem;
+            font-weight: 700;
+            padding: .18rem .48rem;
+            border-radius: 4px
+        }
+
+        .fac-info {
+            padding: 1.1rem
+        }
+
+        .fac-info h4 {
+            font-weight: 700;
+            margin-bottom: .18rem;
+            font-size: .93rem
+        }
+
+        .fac-info .sub {
+            font-size: .76rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: .22rem
+        }
+
+        .fac-info .dept-lbl {
+            font-size: .73rem;
+            color: var(--gray)
+        }
+
+        /* GALLERY */
+        .gallery-controls {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.75rem
+        }
+
+        .gallery-btn {
+            background: #fff;
+            border: 2px solid rgba(45, 106, 79, .1);
+            color: var(--navy);
+            padding: .43rem 1.1rem;
+            border-radius: 20px;
+            font-size: .82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+            font-family: inherit
+        }
+
+        .gallery-btn.active,
+        .gallery-btn:hover {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy)
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1rem
+        }
+
+        .g-item {
+            background: linear-gradient(135deg, var(--navy), #52796f);
+            border-radius: var(--r);
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: .6rem;
+            font-size: 2.8rem;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: all .25s
+        }
+
+        .g-item:hover {
+            transform: scale(1.02)
+        }
+
+        .g-item.tall {
+            grid-row: span 2;
+            aspect-ratio: auto
+        }
+
+        .g-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(13, 27, 62, .6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity .2s
+        }
+
+        .g-item:hover .g-overlay {
+            opacity: 1
+        }
+
+        .g-overlay span {
+            color: var(--navy);
+            font-size: .8rem;
+            font-weight: 700;
+            background: rgba(232, 160, 32, .95);
+            padding: .28rem .72rem;
+            border-radius: 6px
+        }
+
+        .gi-label {
+            color: rgba(255, 255, 255, .65);
+            font-size: .74rem;
+            font-family: var(--font-b)
+        }
+
+        /* NOTICES */
+        .notices-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem
+        }
+
+        .notice-list {
+            display: flex;
+            flex-direction: column;
+            gap: .7rem
+        }
+
+        .notice-item {
+            background: #fff;
+            border-radius: var(--r);
+            padding: 1.1rem 1.3rem;
+            display: flex;
+            gap: .95rem;
+            align-items: flex-start;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, .06);
+            border-left: 4px solid transparent;
+            transition: all .2s;
+            cursor: pointer
+        }
+
+        .notice-item:hover {
+            transform: translateX(4px);
+            border-left-color: var(--gold)
+        }
+
+        .notice-item.urgent {
+            border-left-color: #c1440e
+        }
+
+        .notice-item.new {
+            border-left-color: var(--green)
+        }
+
+        .n-date {
+            background: var(--navy);
+            color: #fff;
+            border-radius: 8px;
+            padding: .45rem .68rem;
+            text-align: center;
+            min-width: 48px;
+            flex-shrink: 0
+        }
+
+        .n-date .day {
+            font-family: var(--font-d);
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1
+        }
+
+        .n-date .mon {
+            font-size: .65rem;
+            text-transform: uppercase;
+            color: var(--gold)
+        }
+
+        .n-content h4 {
+            font-weight: 700;
+            font-size: .9rem;
+            margin-bottom: .22rem
+        }
+
+        .n-content p {
+            font-size: .8rem;
+            color: var(--gray)
+        }
+
+        .pills {
+            display: flex;
+            gap: .4rem;
+            margin-top: .38rem;
+            flex-wrap: wrap
+        }
+
+        .pill {
+            font-size: .67rem;
+            font-weight: 700;
+            padding: .12rem .52rem;
+            border-radius: 10px;
+            text-transform: uppercase
+        }
+
+        .pill-urgent {
+            background: rgba(193, 68, 14, .12);
+            color: #c1440e
+        }
+
+        .pill-exam {
+            background: rgba(82, 121, 111, .15);
+            color: #2d6a4f;
+            border-radius: 10px
+        }
+
+        .pill-event {
+            background: rgba(45, 106, 79, .1);
+            color: var(--navy)
+        }
+
+        .pill-holiday {
+            background: rgba(244, 162, 97, .18);
+            color: #8b5e3c
+        }
+
+        .sidebar-card {
+            background: #fff;
+            border-radius: var(--r);
+            padding: 1.4rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, .06);
+            margin-bottom: 1.25rem
+        }
+
+        .sidebar-card h3 {
+            font-family: var(--font-d);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: .9rem;
+            padding-bottom: .7rem;
+            border-bottom: 2px solid var(--gold)
+        }
+
+        .ev-item {
+            display: flex;
+            gap: .7rem;
+            align-items: center;
+            padding: .55rem 0;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: .82rem
+        }
+
+        .ev-item:last-child {
+            border-bottom: none
+        }
+
+        .ev-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0
+        }
+
+        .hol-item {
+            display: flex;
+            justify-content: space-between;
+            padding: .45rem 0;
+            border-bottom: 1px dashed var(--gray-light);
+            font-size: .8rem
+        }
+
+        .hol-item:last-child {
+            border-bottom: none
+        }
+
+        .hol-date {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: .75rem
+        }
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem
+        }
+
+        .c-card {
+            background: #fff;
+            border-radius: var(--r);
+            padding: 1.3rem;
+            display: flex;
+            gap: .9rem;
+            align-items: flex-start;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, .06);
+            margin-bottom: 1.1rem
+        }
+
+        .c-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--navy);
+            color: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            flex-shrink: 0
+        }
+
+        .c-card h4 {
+            font-weight: 700;
+            font-size: .88rem;
+            margin-bottom: .22rem
+        }
+
+        .c-card p {
+            font-size: .82rem;
+            color: var(--gray);
+            line-height: 1.6
+        }
+
+        .map-box {
+            background: linear-gradient(135deg, #e8f4e8, #d0e8d8);
+            border-radius: var(--r);
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #84b5a0;
+            color: #52796f;
+            flex-direction: column;
+            gap: .5rem
+        }
+
+        .map-box p {
+            font-size: .82rem;
+            color: #52796f;
+            font-family: var(--font-b)
+        }
+
+        .contact-form {
+            background: #fff;
+            border-radius: var(--r);
+            padding: 2.2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 106, 79, .06)
+        }
+
+        .contact-form h3 {
+            font-family: var(--font-d);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: .4rem
+        }
+
+        .contact-form .sub {
+            color: var(--gray);
+            font-size: .87rem;
+            margin-bottom: 1.75rem
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: .38rem;
+            margin-bottom: 1.1rem
+        }
+
+        .form-group label {
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--navy)
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            border: 2px solid #e0e0ec;
+            border-radius: 8px;
+            padding: .68rem .92rem;
+            font-family: inherit;
+            font-size: .88rem;
+            color: var(--navy);
+            transition: border-color .2s;
+            background: #fff;
+            outline: none;
+            width: 100%
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold)
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 88px
+        }
+
+        .form-success {
+            display: none;
+            background: rgba(26, 122, 74, .1);
+            border: 1px solid rgba(26, 122, 74, .3);
+            border-radius: 8px;
+            padding: .9rem 1.1rem;
+            color: var(--green);
+            font-weight: 600;
+            font-size: .88rem;
+            margin-top: 1rem;
+            align-items: center;
+            gap: .5rem
+        }
+
+        .form-success.show {
+            display: flex
+        }
+
+        /* ADMIN PANEL */
+        .admin-panel {
+            background: var(--cream);
+            border: 2px dashed #c8cee0;
+            border-radius: var(--r);
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 2rem
+        }
+
+        .admin-panel h4 {
+            font-size: .75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--gray);
+            margin-bottom: .88rem
+        }
+
+        .admin-controls {
+            display: flex;
+            gap: .85rem;
+            flex-wrap: wrap;
+            align-items: flex-end
+        }
+
+        .admin-controls input,
+        .admin-controls select {
+            border: 1.5px solid #d0d0e0;
+            border-radius: 7px;
+            padding: .5rem .88rem;
+            font-family: inherit;
+            font-size: .83rem;
+            color: var(--navy);
+            background: #fff;
+            outline: none
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: .82rem 1.7rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: .88rem;
+            text-decoration: none;
+            transition: all .2s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy)
+        }
+
+        .btn-primary:hover {
+            background: var(--gold2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232, 160, 32, .4)
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, .4)
+        }
+
+        .btn-outline:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, .08)
+        }
+
+        .btn-sm {
+            padding: .5rem 1.1rem;
+            font-size: .8rem
+        }
+
+        .dyn-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(26, 122, 74, .13);
+            color: var(--green);
+            font-size: .68rem;
+            font-weight: 700;
+            padding: .17rem .52rem;
+            border-radius: 4px;
+            border: 1px solid rgba(26, 122, 74, .25);
+            vertical-align: middle;
+            margin-left: 7px
+        }
+
+        .sta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(45, 106, 79, .08);
+            color: var(--gray);
+            font-size: .68rem;
+            font-weight: 700;
+            padding: .17rem .52rem;
+            border-radius: 4px;
+            border: 1px solid rgba(45, 106, 79, .12);
+            vertical-align: middle;
+            margin-left: 7px
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1b4332;
+            color: #fff;
+            padding: 3rem 2rem 1.75rem
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 2.5rem
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-d);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: .7rem
+        }
+
+        .footer-brand p {
+            font-size: .82rem;
+            color: rgba(220, 240, 228, .6);
+            line-height: 1.65;
+            margin-bottom: 1rem
+        }
+
+        .socials {
+            display: flex;
+            gap: .65rem
+        }
+
+        .soc {
+            width: 34px;
+            height: 34px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+            cursor: pointer;
+            transition: all .2s;
+            color: #fff;
+            text-decoration: none
+        }
+
+        .soc:hover {
+            background: var(--gold);
+            color: var(--navy)
+        }
+
+        .footer-col h4 {
+            color: #f4a261;
+            font-size: .78rem;
+            text-transform: uppercase;
+            letter-spacing: .09em;
+            margin-bottom: .88rem
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .43rem
+        }
+
+        .footer-links a {
+            color: rgba(220, 240, 228, .65);
+            text-decoration: none;
+            font-size: .82rem;
+            transition: color .2s;
+            cursor: pointer
+        }
+
+        .footer-links a:hover {
+            color: var(--gold)
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 2rem auto 0;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(220, 240, 228, .15);
+            display: flex;
+            justify-content: space-between;
+            font-size: .77rem;
+            color: rgba(220, 240, 228, .5)
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:1024px) {
+            .counter-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .spotlight-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .spotlight-main {
+                grid-row: auto;
+                grid-column: span 2
+            }
+
+            .cal-layout {
+                grid-template-columns: 1fr
+            }
+
+            .alumni-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        @media(max-width:768px) {
+
+            .two-col,
+            .vm-grid,
+            .contact-grid,
+            .notices-layout,
+            .test-layout {
+                grid-template-columns: 1fr
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .hamburger {
+                display: flex
+            }
+
+            .stats-bar-inner {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .ql-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .slider-arrows {
+                display: none
+            }
+
+            .counter-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .spotlight-grid {
+                grid-template-columns: 1fr
+            }
+
+            .spotlight-main {
+                grid-column: auto
+            }
+
+            .alumni-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width:480px) {
+            .ql-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr
+            }
+
+            .form-row {
+                grid-template-columns: 1fr
+            }
+
+            .counter-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+
+        /* ── Nature texture touches ── */
+        .why-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 20% 80%, rgba(82, 183, 136, .06) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(244, 162, 97, .06) 0%, transparent 50%);
+            pointer-events: none
+        }
+
+        .why-section {
+            position: relative
+        }
+
+        .alumni-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 30% 70%, rgba(244, 162, 97, .07) 0%, transparent 50%);
+            pointer-events: none
+        }
+
+        .alumni-section {
+            position: relative
+        }
+
+        .counter-strip {
+            position: relative
+        }
+
+        .counter-strip::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 80% 50%, rgba(255, 255, 255, .18) 0%, transparent 60%);
+            pointer-events: none
+        }
+
+        /* Natural card hover border */
+        .why-card:hover {
+            border-color: rgba(224, 122, 95, .45) !important
+        }
+
+        .alumni-card:hover {
+            border-color: rgba(224, 122, 95, .5) !important;
+            transform: translateY(-4px)
+        }
+
+        /* Section dividers */
+        .stats-bar-inner .stat-item {
+            border-right-color: rgba(220, 240, 228, .15)
+        }
+
+        /* Scrollbar natural */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f5ede0
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #84b5a0;
+            border-radius: 3px
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52796f
+        }
+
+        /* MOBILE NAV */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #1b4332;
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem
+        }
+
+        .mobile-nav.open {
+            display: flex
+        }
+
+        .mobile-nav a {
+            color: #e8f5ee;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color .2s
+        }
+
+        .mobile-nav a:hover {
+            color: #f4a261
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FLOATING TOOLBAR -->
+    <div class="fab-bar">
+        <button class="fab fab-admit" data-tip="Apply Now" onclick="showSection('admissions')">🎓</button>
+        <button class="fab fab-notice" data-tip="Notices" onclick="showSection('notices')">🔔</button>
+        <button class="fab fab-phone" data-tip="Contact" onclick="showSection('contact')">📞</button>
+        <button class="fab fab-top" data-tip="Back to Top"
+            onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    </div>
+
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-close" onclick="closeMobileNav()">✕</button>
+        <a onclick="showSection('home');closeMobileNav()" data-i18n="navHome">Home</a>
+        <a onclick="showSection('about');closeMobileNav()" data-i18n="navAbout">About Us</a>
+        <a onclick="showSection('admissions');closeMobileNav()" data-i18n="navAdmissions">Admissions</a>
+        <a onclick="showSection('academics');closeMobileNav()" data-i18n="navAcademics">Academics</a>
+        <a onclick="showSection('gallery');closeMobileNav()" data-i18n="navGallery">Gallery</a>
+        <a onclick="showSection('notices');closeMobileNav()" data-i18n="navNotices">Notices</a>
+        <a onclick="showSection('contact');closeMobileNav()" data-i18n="navContact">Contact Us</a>
+    </div>
+
+    <!-- LANGUAGE BAR -->
+    <div class="lang-bar">
+        <span>🌐</span>
+        <button class="lang-btn active" onclick="setLang('en')" id="btn-en">English</button>
+        <button class="lang-btn" onclick="setLang('hi')" id="btn-hi">हिंदी</button>
+        <button class="lang-btn" onclick="setLang('te')" id="btn-te">తెలుగు</button>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <div class="nav-logo" onclick="showSection('home')">
+                <div class="logo-icon">🏫</div>
+                <div>
+                    <div class="logo-text" data-i18n="schoolName">Greenfield Public School</div>
+                    <small class="logo-sub" data-i18n="schoolTagline">Excellence in Education Since 1975</small>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="showSection('home')" id="nav-home" class="active" data-i18n="navHome">Home</a></li>
+                <li><a onclick="showSection('about')" id="nav-about" data-i18n="navAbout">About Us</a></li>
+                <li><a onclick="showSection('admissions')" id="nav-admissions" data-i18n="navAdmissions">Admissions</a>
+                </li>
+                <li><a onclick="showSection('academics')" id="nav-academics" data-i18n="navAcademics">Academics</a></li>
+                <li><a onclick="showSection('gallery')" id="nav-gallery" data-i18n="navGallery">Gallery</a></li>
+                <li><a onclick="showSection('notices')" id="nav-notices" data-i18n="navNotices">Notices</a></li>
+                <li><a onclick="showSection('contact')" id="nav-contact" data-i18n="navContact">Contact</a></li>
+                <li><a onclick="showSection('admissions')" class="nav-cta" data-i18n="navApply">Apply Now</a></li>
+            </ul>
+            <div class="hamburger" onclick="openMobileNav()"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════
+     HOME
+═══════════════════════════════════════════════════════ -->
+    <section id="home" class="active">
+
+        <!-- HERO SLIDER -->
+        <div class="hero">
+            <!-- Slide 1: Main intro -->
+            <div class="slide active">
+                <div class="slide-bg"
+                    style="background-color:#1b4332;background-image:radial-gradient(ellipse at 20% 50%,#2d6a4f 0%,#1b4332 60%),repeating-linear-gradient(45deg,transparent,transparent 35px,rgba(224,122,95,.04) 35px,rgba(224,122,95,.04) 70px)">
+                </div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <div class="slide-badge" data-i18n="heroBadge">🏅 CBSE Affiliated · School No. 1234567</div>
+                        <h1 data-i18n="heroTitle">Shaping <em>Future Leaders</em><br>Through Excellence</h1>
+                        <p class="slide-desc" data-i18n="heroDesc">At Greenfield, we nurture curious minds, build
+                            character, and empower every student to achieve their highest potential.</p>
+                        <div class="slide-btns">
+                            <button class="btn btn-primary" onclick="showSection('admissions')" data-i18n="heroCta1">🎓
+                                Apply for Admission</button>
+                            <button class="btn btn-outline" onclick="showSection('about')" data-i18n="heroCta2">Learn
+                                More →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Academics -->
+            <div class="slide">
+                <div class="slide-bg" style="background:linear-gradient(135deg,#1b4332 0%,#2d6a4f 50%,#52796f 100%)">
+                </div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <div class="slide-badge" data-i18n="slide2badge">📚 Academic Excellence</div>
+                        <h1 data-i18n="slide2title">CBSE Curriculum<br><em>Reimagined</em></h1>
+                        <p class="slide-desc" data-i18n="slide2desc">Our innovative teaching methods blend NEP 2020
+                            guidelines with technology-enabled learning, STEM focus, and project-based education.</p>
+                        <div class="slide-btns">
+                            <button class="btn btn-primary" onclick="showSection('academics')"
+                                data-i18n="slide2cta">Explore Academics →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Results -->
+            <div class="slide">
+                <div class="slide-bg" style="background:linear-gradient(135deg,#1d3557 0%,#457b9d 50%,#52b788 100%)">
+                </div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <div class="slide-badge" data-i18n="slide3badge">🏆 Board Results 2024</div>
+                        <h1 data-i18n="slide3title"><em>98.4%</em> Pass Rate<br>Class X Board 2024</h1>
+                        <p class="slide-desc" data-i18n="slide3desc">Topper scored 498/500. 24 students achieved
+                            distinction. We are proud of every student who made us shine nationally.</p>
+                        <div class="slide-btns">
+                            <button class="btn btn-primary" onclick="showSection('notices')" data-i18n="slide3cta">View
+                                Results →</button>
+                            <button class="btn btn-outline" onclick="showSection('admissions')" data-i18n="heroCta1">🎓
+                                Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Sports -->
+            <div class="slide">
+                <div class="slide-bg" style="background:linear-gradient(135deg,#7f4f24 0%,#c1440e 50%,#e07a5f 100%)">
+                </div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <div class="slide-badge" data-i18n="slide4badge">⚽ Sports & Activities</div>
+                        <h1 data-i18n="slide4title">Champions on the<br><em>Field & Classroom</em></h1>
+                        <p class="slide-desc" data-i18n="slide4desc">National-level athletes, state chess champions, and
+                            inter-school tournament winners — Greenfield nurtures excellence beyond academics.</p>
+                        <div class="slide-btns">
+                            <button class="btn btn-primary" onclick="showSection('gallery')" data-i18n="slide4cta">View
+                                Gallery →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Annual Day -->
+            <div class="slide">
+                <div class="slide-bg" style="background:linear-gradient(135deg,#4a3728 0%,#8b5e3c 50%,#c1440e 100%)">
+                </div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <div class="slide-badge" data-i18n="slide5badge">🎭 Annual Day 2024</div>
+                        <h1 data-i18n="slide5title">Join Us for<br><em>"Colours of India"</em></h1>
+                        <p class="slide-desc" data-i18n="slide5desc">December 20, 2024 • 5:00 PM • School Auditorium. A
+                            spectacular evening of cultural performances, awards, and memories.</p>
+                        <div class="slide-btns">
+                            <button class="btn btn-primary" onclick="showSection('notices')" data-i18n="slide5cta">View
+                                All Events →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide arrows -->
+            <div class="slider-arrows">
+                <button class="arrow" onclick="changeSlide(-1)">&#8592;</button>
+                <button class="arrow" onclick="changeSlide(1)">&#8594;</button>
+            </div>
+
+            <!-- Slide dots -->
+            <div class="slider-nav">
+                <button class="dot active" onclick="goToSlide(0)"></button>
+                <button class="dot" onclick="goToSlide(1)"></button>
+                <button class="dot" onclick="goToSlide(2)"></button>
+                <button class="dot" onclick="goToSlide(3)"></button>
+                <button class="dot" onclick="goToSlide(4)"></button>
+            </div>
+
+            <!-- Ticker -->
+            <div class="hero-ticker">
+                <div class="ticker-track" id="ticker-track">
+                    <span>📢 Class X Board Results 2024 — 98.4% Pass Rate</span>
+                    <span>🏆 National Science Olympiad Winners 2024</span>
+                    <span>📅 Admissions Open 2025-26 — Apply Before March 31</span>
+                    <span>🎭 Annual Day "Colours of India" — December 20</span>
+                    <span>🏅 State Chess Championship — 1st Place</span>
+                    <span>📢 Class X Board Results 2024 — 98.4% Pass Rate</span>
+                    <span>🏆 National Science Olympiad Winners 2024</span>
+                    <span>📅 Admissions Open 2025-26 — Apply Before March 31</span>
+                    <span>🎭 Annual Day "Colours of India" — December 20</span>
+                    <span>🏅 State Chess Championship — 1st Place</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS BAR (Animated Counters) -->
+        <div class="stats-bar">
+            <div class="stats-bar-inner">
+                <div class="stat-item"><span class="stat-num" data-target="2400" data-suffix="+">0</span><span
+                        class="stat-lbl" data-i18n="stat1">Students</span></div>
+                <div class="stat-item"><span class="stat-num" data-target="120" data-suffix="+">0</span><span
+                        class="stat-lbl" data-i18n="stat2">Faculty</span></div>
+                <div class="stat-item"><span class="stat-num" data-target="49" data-suffix="">0</span><span
+                        class="stat-lbl" data-i18n="stat3">Years Legacy</span></div>
+                <div class="stat-item"><span class="stat-num" data-target="98" data-suffix=".4%">0</span><span
+                        class="stat-lbl" data-i18n="stat4">Board Result</span></div>
+            </div>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="quick-links">
+            <div class="ql-grid">
+                <div class="ql-item" onclick="showSection('admissions')">
+                    <div class="ql-icon">📋</div>
+                    <div class="ql-lbl" data-i18n="navAdmissions">Admissions</div>
+                </div>
+                <div class="ql-item" onclick="showSection('notices')">
+                    <div class="ql-icon">🔔</div>
+                    <div class="ql-lbl" data-i18n="qlResults">Results & Notices</div>
+                </div>
+                <div class="ql-item" onclick="showSection('academics')">
+                    <div class="ql-icon">📚</div>
+                    <div class="ql-lbl" data-i18n="navAcademics">Academics</div>
+                </div>
+                <div class="ql-item" onclick="showSection('gallery')">
+                    <div class="ql-icon">📸</div>
+                    <div class="ql-lbl" data-i18n="navGallery">Gallery</div>
+                </div>
+                <div class="ql-item" onclick="showSection('contact')">
+                    <div class="ql-icon">📞</div>
+                    <div class="ql-lbl" data-i18n="navContact">Contact Us</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANN STRIP -->
+        <div class="ann-strip">
+            <span class="tag" data-i18n="important">⚡ Important</span>
+            <p data-i18n="noticeStrip"><strong>Admission 2025-26:</strong> Last date to submit application forms is
+                <strong>March 31, 2025.</strong> Download form below.</p>
+        </div>
+
+        <!-- NEWS GRID -->
+        <div class="page-section">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="latestNews">📰 Latest News</div>
+                <h2 data-i18n="newsTitle">News & Highlights <span class="dyn-badge">⚡ Dynamic</span></h2>
+                <p data-i18n="newsDesc">Stay updated with the latest happenings at Greenfield Public School</p>
+            </div>
+            <div class="admin-panel">
+                <h4 data-i18n="adminAnn">🛠 Admin Panel — Add Announcement</h4>
+                <div class="admin-controls">
+                    <input type="text" id="ann-title" placeholder="Announcement title..." style="width:240px"
+                        data-i18n-ph="annPh">
+                    <select id="ann-type">
+                        <option data-i18n="typeEvent">Event</option>
+                        <option data-i18n="typeExam">Exam</option>
+                        <option data-i18n="typeHoliday">Holiday</option>
+                        <option data-i18n="typeUrgent">Urgent</option>
+                    </select>
+                    <button class="btn btn-primary btn-sm" onclick="addAnnouncement()" data-i18n="addBtn">+ Add</button>
+                </div>
+            </div>
+            <div class="cards-grid" id="news-grid">
+                <div class="card">
+                    <div class="card-img">🏆</div>
+                    <div class="card-body">
+                        <div class="card-tag" data-i18n="tagAchievement">Achievement</div>
+                        <h3 data-i18n="news1title">National Science Olympiad — Gold Medal</h3>
+                        <p data-i18n="news1desc">Riya Sharma of Class XII secured 1st rank at the National Science
+                            Olympiad in New Delhi.</p>
+                    </div>
+                    <div class="card-footer"><span>Nov 15, 2024</span><span data-i18n="readMore">📖 Read more</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">🎭</div>
+                    <div class="card-body">
+                        <div class="card-tag" data-i18n="typeEvent">Event</div>
+                        <h3 data-i18n="news2title">Annual Day 2024 — "Colours of India"</h3>
+                        <p data-i18n="news2desc">Grand Annual Day celebration scheduled for December 20 with cultural
+                            performances and awards.</p>
+                    </div>
+                    <div class="card-footer"><span>Nov 10, 2024</span><span data-i18n="readMore">📖 Read more</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">📊</div>
+                    <div class="card-body">
+                        <div class="card-tag" data-i18n="tagResults">Results</div>
+                        <h3 data-i18n="news3title">Class X & XII Board Results 2024</h3>
+                        <p data-i18n="news3desc">98.4% pass rate in Class X and 99.1% in Class XII. School topper scored
+                            498/500.</p>
+                    </div>
+                    <div class="card-footer"><span>Jun 5, 2024</span><span data-i18n="readMore">📖 Read more</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WHY CHOOSE US — Horizontal Scroll -->
+        <div class="why-section">
+            <div class="why-header">
+                <div class="section-tag"
+                    style="background:rgba(255,255,255,.12);border-color:var(--gold);color:rgba(255,255,255,.85)"
+                    data-i18n="whyTag">⭐ Why Greenfield</div>
+                <h2 data-i18n="whyTitle">Why Families Choose Us</h2>
+                <p data-i18n="whyDesc">Scroll to discover what makes Greenfield the first choice for 2,400+ families</p>
+            </div>
+            <div class="why-scroll-wrapper" id="whyScroll">
+                <div class="why-track">
+                    <div class="why-card">
+                        <div class="why-icon">🏅</div>
+                        <h4 data-i18n="why1h">CBSE Excellence</h4>
+                        <p data-i18n="why1p">Consistently above 98% board results for 12 consecutive years. Top-ranked
+                            in the state.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">🔬</div>
+                        <h4 data-i18n="why2h">STEM-First Approach</h4>
+                        <p data-i18n="why2p">Dedicated robotics lab, coding classes from Class I, and inter-school tech
+                            championships.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">🌍</div>
+                        <h4 data-i18n="why3h">Holistic Development</h4>
+                        <p data-i18n="why3p">Sports, arts, drama, music, yoga — every child discovers and nurtures their
+                            unique talent.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">👩‍🏫</div>
+                        <h4 data-i18n="why4h">Expert Faculty</h4>
+                        <p data-i18n="why4p">120+ qualified educators, many with 10-20+ years of experience and
+                            postgraduate degrees.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">🏟️</div>
+                        <h4 data-i18n="why5h">World-Class Campus</h4>
+                        <p data-i18n="why5p">8-acre green campus with smart classrooms, labs, pool, courts, and a
+                            500-seat auditorium.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">🛡️</div>
+                        <h4 data-i18n="why6h">Safe Environment</h4>
+                        <p data-i18n="why6p">CCTV surveillance, GPS-tracked buses, trained counselors, and an
+                            anti-bullying committee.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">📱</div>
+                        <h4 data-i18n="why7h">Parent Connect App</h4>
+                        <p data-i18n="why7p">Real-time attendance, marks, fees, and communication with teachers — all on
+                            one app.</p>
+                    </div>
+                    <div class="why-card">
+                        <div class="why-icon">🎓</div>
+                        <h4 data-i18n="why8h">Alumni Network</h4>
+                        <p data-i18n="why8p">3,000+ proud alumni across IITs, IIMs, AIIMS, and global universities
+                            supporting current students.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TESTIMONIALS -->
+        <div class="test-section">
+            <div class="page-section">
+                <div class="test-layout">
+                    <div class="test-left">
+                        <div class="section-tag" data-i18n="testTag">💬 Parent Reviews</div>
+                        <h2 data-i18n="testTitle">What Parents & Students Say</h2>
+                        <p data-i18n="testDesc">Don't just take our word for it — hear from the families who chose
+                            Greenfield and saw the difference firsthand.</p>
+                        <div class="test-stats">
+                            <div class="ts">
+                                <div class="n">4.9★</div>
+                                <div class="l" data-i18n="testRating">Parent Rating</div>
+                            </div>
+                            <div class="ts">
+                                <div class="n">98%</div>
+                                <div class="l" data-i18n="testSatisfied">Families Satisfied</div>
+                            </div>
+                            <div class="ts">
+                                <div class="n">95%</div>
+                                <div class="l" data-i18n="testRecommend">Would Recommend</div>
+                            </div>
+                            <div class="ts">
+                                <div class="n">2,400+</div>
+                                <div class="l" data-i18n="testFamilies">Happy Families</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="test-slider" id="testSlider">
+                            <div class="test-card active">
+                                <div class="quote-mark">"</div>
+                                <p data-i18n="test1">"Greenfield completely transformed my daughter's confidence. She
+                                    went from being shy to leading the school debate team. The teachers here truly care
+                                    about every child's growth beyond just marks."</p>
+                                <div class="test-author">
+                                    <div class="test-avatar">👩</div>
+                                    <div>
+                                        <div class="test-name">Mrs. Kavitha Reddy</div>
+                                        <div class="test-role" data-i18n="testRole1">Parent of Class IX Student</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="test-card">
+                                <div class="quote-mark">"</div>
+                                <p data-i18n="test2">"The STEM programme here is exceptional. My son built his first
+                                    robot in Class V! His curiosity and problem-solving skills have grown beyond what I
+                                    imagined. Greenfield is the best decision we made."</p>
+                                <div class="test-author">
+                                    <div class="test-avatar">👨</div>
+                                    <div>
+                                        <div class="test-name">Mr. Ramesh Gupta</div>
+                                        <div class="test-role" data-i18n="testRole2">Parent of Class VII Student</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="test-card">
+                                <div class="quote-mark">"</div>
+                                <p data-i18n="test3">"I scored 98.6% in Class XII boards! The faculty's dedication is
+                                    unmatched. They were available even on weekends for doubt sessions. Greenfield made
+                                    my IIT dream a reality."</p>
+                                <div class="test-author">
+                                    <div class="test-avatar">🧑</div>
+                                    <div>
+                                        <div class="test-name">Arjun Mehta</div>
+                                        <div class="test-role" data-i18n="testRole3">Class XII Alumni, IIT Delhi</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="test-card">
+                                <div class="quote-mark">"</div>
+                                <p data-i18n="test4">"As a parent of three Greenfield students, I've seen the consistent
+                                    quality over 10 years. The school communicates proactively, the campus is safe, and
+                                    the values instilled are for life."</p>
+                                <div class="test-author">
+                                    <div class="test-avatar">👩</div>
+                                    <div>
+                                        <div class="test-name">Mrs. Sunita Sharma</div>
+                                        <div class="test-role" data-i18n="testRole4">Parent · 10+ Years Greenfield
+                                            Family</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="test-dots">
+                            <button class="t-dot active" onclick="goToTest(0)"></button>
+                            <button class="t-dot" onclick="goToTest(1)"></button>
+                            <button class="t-dot" onclick="goToTest(2)"></button>
+                            <button class="t-dot" onclick="goToTest(3)"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ANIMATED COUNTER STRIP -->
+        <div class="counter-strip">
+            <div class="counter-grid">
+                <div class="counter-item">
+                    <div class="num"><span class="count-num" data-target="2400" data-suffix="+">2400</span></div>
+                    <div class="lbl" data-i18n="cnt1">Students Enrolled</div>
+                </div>
+                <div class="counter-item">
+                    <div class="num"><span class="count-num" data-target="120" data-suffix="+">120</span></div>
+                    <div class="lbl" data-i18n="cnt2">Expert Faculty</div>
+                </div>
+                <div class="counter-item">
+                    <div class="num"><span class="count-num" data-target="49" data-suffix="">49</span></div>
+                    <div class="lbl" data-i18n="cnt3">Years of Excellence</div>
+                </div>
+                <div class="counter-item">
+                    <div class="num"><span class="count-num" data-target="3000" data-suffix="+">3000</span></div>
+                    <div class="lbl" data-i18n="cnt4">Proud Alumni</div>
+                </div>
+                <div class="counter-item">
+                    <div class="num"><span class="count-num" data-target="50" data-suffix="+">50</span></div>
+                    <div class="lbl" data-i18n="cnt5">Awards Won</div>
+                </div>
+                <div class="counter-item">
+                    <div class="num"><span class="count-num" data-target="98" data-suffix=".4%">98</span></div>
+                    <div class="lbl" data-i18n="cnt6">Board Pass Rate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STUDENT SPOTLIGHT -->
+        <div class="page-section">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="spotTag">🌟 Spotlight</div>
+                <h2 data-i18n="spotTitle">Student Spotlight</h2>
+                <p data-i18n="spotDesc">Celebrating the extraordinary achievements of our students</p>
+            </div>
+            <div class="spotlight-grid">
+                <div class="spotlight-main">
+                    <span class="spotlight-avatar">🧑‍🎓</span>
+                    <div class="spotlight-badge" data-i18n="spotBadge">⭐ Star of the Year</div>
+                    <h3 data-i18n="spot1name">Riya Sharma</h3>
+                    <div class="role" data-i18n="spot1role">Class XII | Science | School Topper</div>
+                    <p data-i18n="spot1desc">"Riya achieved 498/500 in CBSE boards, won the National Science Olympiad
+                        gold medal, represented Telangana at the national debate championship, and secured admission to
+                        IIT Bombay. A true all-rounder who exemplifies the Greenfield spirit."</p>
+                </div>
+                <div class="spot-card">
+                    <div class="emoji">♟️</div>
+                    <h4 data-i18n="spot2name">Aryan Verma</h4>
+                    <div class="grade" data-i18n="spot2grade">Class X | Chess Champion</div>
+                    <p data-i18n="spot2desc">State-level chess champion 2024. Won 12 consecutive tournament matches.
+                        Aspires to become India's youngest Grandmaster.</p>
+                </div>
+                <div class="spot-card">
+                    <div class="emoji">🎨</div>
+                    <h4 data-i18n="spot3name">Priya Iyer</h4>
+                    <div class="grade" data-i18n="spot3grade">Class VIII | Arts Star</div>
+                    <p data-i18n="spot3desc">National-level painting competition winner. Work selected for NCERT
+                        textbook illustration. Represented Hyderabad at national youth arts summit.</p>
+                </div>
+                <div class="spot-card">
+                    <div class="emoji">🏊</div>
+                    <h4 data-i18n="spot4name">Rahul Nair</h4>
+                    <div class="grade" data-i18n="spot4grade">Class XI | Sports Star</div>
+                    <p data-i18n="spot4desc">State swimming champion. Selected for Telangana U-19 team. Trains 3 hours
+                        daily while maintaining a 92% academic score.</p>
+                </div>
+                <div class="spot-card">
+                    <div class="emoji">💻</div>
+                    <h4 data-i18n="spot5name">Ananya Singh</h4>
+                    <div class="grade" data-i18n="spot5grade">Class IX | Tech Innovator</div>
+                    <p data-i18n="spot5desc">Built an AI-powered attendance app at age 14. Won Hyderabad Young Innovator
+                        Award 2024. Featured in Times of India.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- EVENTS CALENDAR -->
+        <div class="cal-section">
+            <div class="page-section">
+                <div class="section-header">
+                    <div class="section-tag" data-i18n="calTag">📅 Schedule</div>
+                    <h2 data-i18n="calTitle">Events Calendar</h2>
+                    <p data-i18n="calDesc">Plan ahead with all school events, exams, and important dates</p>
+                </div>
+                <div class="cal-layout">
+                    <div class="cal-widget">
+                        <div class="cal-header">
+                            <button class="cal-nav" onclick="changeMonth(-1)">‹</button>
+                            <h3 id="cal-month-label">December 2024</h3>
+                            <button class="cal-nav" onclick="changeMonth(1)">›</button>
+                        </div>
+                        <div class="cal-days-header">
+                            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                        </div>
+                        <div class="cal-grid" id="cal-grid"></div>
+                    </div>
+                    <div>
+                        <div class="event-list-sidebar">
+                            <div class="el-header">
+                                <h3 data-i18n="upcomingEvents">📅 Upcoming Events</h3>
+                            </div>
+                            <div class="el-item">
+                                <div class="el-date">
+                                    <div class="day">20</div>
+                                    <div class="mon">Dec</div>
+                                </div>
+                                <div class="el-info">
+                                    <h4 data-i18n="ev1">Annual Day Celebration</h4>
+                                    <p>5:00 PM • School Auditorium</p>
+                                </div>
+                            </div>
+                            <div class="el-item">
+                                <div class="el-date">
+                                    <div class="day">26</div>
+                                    <div class="mon">Jan</div>
+                                </div>
+                                <div class="el-info">
+                                    <h4 data-i18n="ev5r">Republic Day</h4>
+                                    <p>8:00 AM • School Ground</p>
+                                </div>
+                            </div>
+                            <div class="el-item">
+                                <div class="el-date">
+                                    <div class="day">15</div>
+                                    <div class="mon">Feb</div>
+                                </div>
+                                <div class="el-info">
+                                    <h4 data-i18n="ev3">Board Practicals Begin</h4>
+                                    <p>Class X & XII</p>
+                                </div>
+                            </div>
+                            <div class="el-item">
+                                <div class="el-date">
+                                    <div class="day">18</div>
+                                    <div class="mon">Jan</div>
+                                </div>
+                                <div class="el-info">
+                                    <h4 data-i18n="ev4">Parent-Teacher Meeting</h4>
+                                    <p>9:00 AM – 1:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="el-item">
+                                <div class="el-date">
+                                    <div class="day">31</div>
+                                    <div class="mon">Mar</div>
+                                </div>
+                                <div class="el-info">
+                                    <h4 data-i18n="calDeadline">Admission Deadline</h4>
+                                    <p data-i18n="calDeadlineP">Last date for 2025-26 forms</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEFORE / AFTER SLIDER -->
+        <div class="ba-section">
+            <div class="ba-inner">
+                <div class="section-header" style="text-align:center">
+                    <div class="section-tag" data-i18n="baTag">🏫 Then vs Now</div>
+                    <h2 data-i18n="baTitle">Campus Transformation</h2>
+                    <p data-i18n="baDesc">Drag the slider to see how Greenfield has transformed over the decades</p>
+                </div>
+                <div class="ba-container" id="baContainer" style="height:400px">
+                    <div class="ba-before">
+                        <div style="font-size:5rem">🏚️</div>
+                        <div class="ba-label" data-i18n="ba1975">1975 Campus</div>
+                    </div>
+                    <div class="ba-after" style="clip-path:inset(0 0 0 50%)">
+                        <div style="font-size:5rem">🏫</div>
+                        <div class="ba-label" data-i18n="ba2024">2024 Campus</div>
+                    </div>
+                    <div class="ba-handle-icon" id="baHandle" style="left:50%">⇄</div>
+                </div>
+                <p style="text-align:center;color:var(--gray);font-size:.82rem;margin-top:1rem" data-i18n="baDragHint">←
+                    Drag the handle to compare →</p>
+            </div>
+        </div>
+
+        <!-- ALUMNI -->
+        <div class="alumni-section">
+            <div class="alumni-inner">
+                <div class="alumni-header">
+                    <div class="section-tag"
+                        style="background:rgba(255,255,255,.12);border-color:var(--gold);color:rgba(255,255,255,.85)"
+                        data-i18n="alumniTag">🎓 Alumni</div>
+                    <h2 data-i18n="alumniTitle">Our Proud Alumni</h2>
+                    <p data-i18n="alumniDesc">Greenfielders making a difference across medicine, technology, arts, and
+                        public service</p>
+                </div>
+                <div class="alumni-grid">
+                    <div class="alumni-card">
+                        <div class="alumni-emoji">👨‍⚕️</div>
+                        <h4>Dr. Anil Rao</h4>
+                        <div class="alumni-year">Batch 2005</div>
+                        <p>AIIMS Delhi · Senior Cardiologist</p>
+                        <div class="alumni-tag">Medicine</div>
+                    </div>
+                    <div class="alumni-card">
+                        <div class="alumni-emoji">👩‍💻</div>
+                        <h4>Sneha Reddy</h4>
+                        <div class="alumni-year">Batch 2010</div>
+                        <p>Google DeepMind · AI Research Scientist</p>
+                        <div class="alumni-tag">Technology</div>
+                    </div>
+                    <div class="alumni-card">
+                        <div class="alumni-emoji">🧑‍💼</div>
+                        <h4>Karan Mehta</h4>
+                        <div class="alumni-year">Batch 2008</div>
+                        <p>IAS Officer · District Collector, Warangal</p>
+                        <div class="alumni-tag">Civil Services</div>
+                    </div>
+                    <div class="alumni-card">
+                        <div class="alumni-emoji">👩‍🎨</div>
+                        <h4>Priya Nair</h4>
+                        <div class="alumni-year">Batch 2012</div>
+                        <p>National Award Winning Film Director</p>
+                        <div class="alumni-tag">Arts & Film</div>
+                    </div>
+                    <div class="alumni-card">
+                        <div class="alumni-emoji">🧑‍🚀</div>
+                        <h4>Rahul Sharma</h4>
+                        <div class="alumni-year">Batch 2007</div>
+                        <p>ISRO · Satellite Mission Scientist</p>
+                        <div class="alumni-tag">Space Tech</div>
+                    </div>
+                    <div class="alumni-card">
+                        <div class="alumni-emoji">👩‍⚖️</div>
+                        <h4>Anjali Kumar</h4>
+                        <div class="alumni-year">Batch 2009</div>
+                        <p>High Court Advocate · Legal Aid Champion</p>
+                        <div class="alumni-tag">Law</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section><!-- END HOME -->
+
+    <!-- ═══════════════════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════════════════ -->
+    <section id="about">
+        <div class="page-section">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="ourStory">🏛 Our Story</div>
+                <h2 data-i18n="aboutTitle">About Greenfield <span class="sta-badge">📄 Static</span></h2>
+            </div>
+            <div class="two-col">
+                <div class="img-box" data-label="Est. 1975">🏫</div>
+                <div class="about-text">
+                    <h2 data-i18n="aboutH2">A Legacy of Academic Excellence</h2>
+                    <p data-i18n="aboutP1">Founded in 1975 by Mr. Rajendra Prasad Sharma, Greenfield Public School began
+                        with 80 students and a vision to bring quality education to Hyderabad. Today we stand as one of
+                        Telangana's premier CBSE institutions.</p>
+                    <p data-i18n="aboutP2">We serve over 2,400 students from Nursery to Class XII, backed by 120+
+                        experienced educators across 8 acres of modern infrastructure.</p>
+                    <p data-i18n="aboutP3">Our alumni are doctors, engineers, artists, entrepreneurs and civil servants,
+                        carrying Greenfield's values across the world.</p><button class="btn btn-primary"
+                        style="margin-top:.5rem" data-i18n="downloadBrochure">Download School Brochure 📥</button>
+                </div>
+            </div>
+            <div class="vm-grid">
+                <div class="vm-card">
+                    <div class="icon">🎯</div>
+                    <h3 data-i18n="vision">Our Vision</h3>
+                    <p data-i18n="visionText">To be a globally recognized institution that empowers every student with
+                        knowledge, values and skills to thrive in a rapidly evolving world.</p>
+                </div>
+                <div class="vm-card">
+                    <div class="icon">🌱</div>
+                    <h3 data-i18n="mission">Our Mission</h3>
+                    <p data-i18n="missionText">To provide a safe, inclusive, and stimulating learning environment where
+                        academic rigor meets holistic development — nurturing confident, ethical citizens.</p>
+                </div>
+            </div>
+            <div class="principal-card">
+                <div class="p-avatar">👨‍🏫</div>
+                <div class="p-msg">
+                    <h3 data-i18n="principalName">Dr. Suresh Kumar Rao</h3>
+                    <div class="title" data-i18n="principalTitle">Principal, Greenfield Public School</div>
+                    <blockquote data-i18n="principalMsg">"At Greenfield, we believe every child carries the seeds of
+                        greatness. Our role is to provide the right environment to help those seeds bloom. I warmly
+                        welcome you to the Greenfield family."</blockquote>
+                </div>
+            </div>
+            <div class="section-header">
+                <h2 data-i18n="infra">Infrastructure & Facilities</h2>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-img">🔬</div>
+                    <div class="card-body">
+                        <div class="card-tag" data-i18n="tagSci">Science</div>
+                        <h3 data-i18n="infra1h">Modern Laboratories</h3>
+                        <p data-i18n="infra1p">Fully equipped Physics, Chemistry, Biology, and Computer labs with latest
+                            instruments.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">📚</div>
+                    <div class="card-body">
+                        <div class="card-tag" data-i18n="tagLib">Knowledge</div>
+                        <h3 data-i18n="infra2h">Central Library</h3>
+                        <p data-i18n="infra2p">Over 15,000 books, digital reading stations, and a dedicated e-library.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">🏟️</div>
+                    <div class="card-body">
+                        <div class="card-tag" data-i18n="tagSport">Sports</div>
+                        <h3 data-i18n="infra3h">Sports Complex</h3>
+                        <p data-i18n="infra3p">Cricket, football, basketball, swimming pool, and badminton courts.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">🎨</div>
+                    <div class="card-body">
+                        <div class="card-tag" data-i18n="tagArts">Arts</div>
+                        <h3 data-i18n="infra4h">Arts & Music Room</h3>
+                        <p data-i18n="infra4p">Dedicated spaces for fine arts, craft, music, dance, and theatre.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMISSIONS -->
+    <section id="admissions">
+        <div class="page-section">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="joinUs">🎓 Join Us</div>
+                <h2 data-i18n="admTitle">Admissions 2025–26 <span class="sta-badge">📄 Static</span></h2>
+                <p data-i18n="admDesc">We invite applications for Nursery to Class IX and Class XI. Limited seats
+                    available.</p>
+            </div>
+            <div class="section-header">
+                <h2 data-i18n="admProcess">Admission Process</h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h4 data-i18n="step1h">Download Form</h4>
+                    <p data-i18n="step1p">Get the admission form from below or visit the school office.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h4 data-i18n="step2h">Fill & Submit</h4>
+                    <p data-i18n="step2p">Complete the form with required documents and submit.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h4 data-i18n="step3h">Entrance Test</h4>
+                    <p data-i18n="step3p">Written test for eligible candidates (Class III onwards).</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h4 data-i18n="step4h">Counselling</h4>
+                    <p data-i18n="step4p">Counselling session with the Principal for selected students.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">5</div>
+                    <h4 data-i18n="step5h">Fee Payment</h4>
+                    <p data-i18n="step5p">Pay the fee and collect student ID and handbook.</p>
+                </div>
+            </div>
+            <div class="section-header">
+                <h2 data-i18n="feeStruct">Fee Structure 2025–26</h2>
+            </div>
+            <table class="fee-table" style="margin-bottom:3rem">
+                <thead>
+                    <tr>
+                        <th data-i18n="feeClass">Class</th>
+                        <th data-i18n="feeTuition">Tuition (Annual)</th>
+                        <th data-i18n="feeDev">Development Fee</th>
+                        <th data-i18n="feeTrans">Transport</th>
+                        <th data-i18n="feeTotal">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-i18n="feeR1">Nursery – KG</td>
+                        <td>₹45,000</td>
+                        <td>₹8,000</td>
+                        <td>₹12,000</td>
+                        <td>₹65,000</td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="feeR2">Class I – V</td>
+                        <td>₹55,000</td>
+                        <td>₹10,000</td>
+                        <td>₹12,000</td>
+                        <td>₹77,000</td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="feeR3">Class VI – VIII</td>
+                        <td>₹65,000</td>
+                        <td>₹12,000</td>
+                        <td>₹14,000</td>
+                        <td>₹91,000</td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="feeR4">Class IX – X</td>
+                        <td>₹75,000</td>
+                        <td>₹15,000</td>
+                        <td>₹14,000</td>
+                        <td>₹1,04,000</td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="feeR5">Class XI–XII (Sci)</td>
+                        <td>₹90,000</td>
+                        <td>₹18,000</td>
+                        <td>₹14,000</td>
+                        <td>₹1,22,000</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="section-header">
+                <h2 data-i18n="downloadForms">Download Forms</h2>
+            </div>
+            <div class="dl-grid">
+                <div class="dl-card">
+                    <div class="dl-icon">📋</div>
+                    <div>
+                        <h4 data-i18n="dl1h">Admission Form</h4>
+                        <p>PDF · 340 KB</p>
+                    </div><button class="dl-btn" data-i18n="dlBtn">⬇ Download</button>
+                </div>
+                <div class="dl-card">
+                    <div class="dl-icon">📄</div>
+                    <div>
+                        <h4 data-i18n="dl2h">Fee Structure</h4>
+                        <p>PDF · 210 KB</p>
+                    </div><button class="dl-btn" data-i18n="dlBtn">⬇ Download</button>
+                </div>
+                <div class="dl-card">
+                    <div class="dl-icon">📝</div>
+                    <div>
+                        <h4 data-i18n="dl3h">Scholarship Form</h4>
+                        <p>PDF · 180 KB</p>
+                    </div><button class="dl-btn" data-i18n="dlBtn">⬇ Download</button>
+                </div>
+                <div class="dl-card">
+                    <div class="dl-icon">📘</div>
+                    <div>
+                        <h4 data-i18n="dl4h">Prospectus</h4>
+                        <p>PDF · 2.4 MB</p>
+                    </div><button class="dl-btn" data-i18n="dlBtn">⬇ Download</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACADEMICS -->
+    <section id="academics">
+        <div class="page-section">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="learning">📚 Learning</div>
+                <h2 data-i18n="acaTitle">Academics <span class="sta-badge">📄 Static</span> <span class="dyn-badge">⚡
+                        Faculty Dynamic</span></h2>
+                <p data-i18n="acaDesc">CBSE curriculum delivered through innovative, student-centred teaching</p>
+            </div>
+            <div class="section-header">
+                <h2 data-i18n="departments">Our Departments</h2>
+            </div>
+            <div class="dept-grid" style="margin-bottom:3rem">
+                <div class="dept-card">
+                    <div class="icon">🔬</div>
+                    <h4 data-i18n="dept1">Science & Technology</h4>
+                </div>
+                <div class="dept-card">
+                    <div class="icon">📐</div>
+                    <h4 data-i18n="dept2">Mathematics</h4>
+                </div>
+                <div class="dept-card">
+                    <div class="icon">📖</div>
+                    <h4 data-i18n="dept3">Languages</h4>
+                </div>
+                <div class="dept-card">
+                    <div class="icon">💻</div>
+                    <h4 data-i18n="dept4">Computer Science</h4>
+                </div>
+                <div class="dept-card">
+                    <div class="icon">🌍</div>
+                    <h4 data-i18n="dept5">Social Studies</h4>
+                </div>
+                <div class="dept-card">
+                    <div class="icon">🎨</div>
+                    <h4 data-i18n="dept6">Arts & Craft</h4>
+                </div>
+                <div class="dept-card">
+                    <div class="icon">🎵</div>
+                    <h4 data-i18n="dept7">Music & Dance</h4>
+                </div>
+                <div class="dept-card">
+                    <div class="icon">⚽</div>
+                    <h4 data-i18n="dept8">Physical Ed.</h4>
+                </div>
+            </div>
+            <div class="section-header">
+                <h2 data-i18n="ourFaculty">Our Faculty <span class="dyn-badge">⚡ Dynamic</span></h2>
+            </div>
+            <div class="admin-panel">
+                <h4 data-i18n="adminFac">🛠 Admin Panel — Add Faculty</h4>
+                <div class="admin-controls"><input type="text" id="fac-name" placeholder="Faculty name..."
+                        style="width:170px" data-i18n-ph="facNamePh"><input type="text" id="fac-subj"
+                        placeholder="Subject..." style="width:140px" data-i18n-ph="facSubjPh"><input type="text"
+                        id="fac-exp" placeholder="Exp. (e.g. 12 years)" style="width:145px"
+                        data-i18n-ph="facExpPh"><button class="btn btn-primary btn-sm" onclick="addFaculty()"
+                        data-i18n="addFacBtn">+ Add Faculty</button></div>
+            </div>
+            <div class="faculty-grid" id="faculty-grid">
+                <div class="fac-card">
+                    <div class="fac-avatar">👩‍🏫<span class="fac-badge">HOD</span></div>
+                    <div class="fac-info">
+                        <h4>Mrs. Anita Sharma</h4>
+                        <div class="sub" data-i18n="dept2">Mathematics</div>
+                        <div class="dept-lbl">M.Sc., B.Ed. · 18 yrs</div>
+                    </div>
+                </div>
+                <div class="fac-card">
+                    <div class="fac-avatar">👨‍🔬</div>
+                    <div class="fac-info">
+                        <h4>Mr. Rajesh Nair</h4>
+                        <div class="sub">Physics</div>
+                        <div class="dept-lbl">M.Sc., B.Ed. · 14 yrs</div>
+                    </div>
+                </div>
+                <div class="fac-card">
+                    <div class="fac-avatar">👩‍💻</div>
+                    <div class="fac-info">
+                        <h4>Ms. Priya Reddy</h4>
+                        <div class="sub" data-i18n="dept4">Computer Science</div>
+                        <div class="dept-lbl">MCA, B.Ed. · 9 yrs</div>
+                    </div>
+                </div>
+                <div class="fac-card">
+                    <div class="fac-avatar">👨‍🎨</div>
+                    <div class="fac-info">
+                        <h4>Mr. Sanjay Kumar</h4>
+                        <div class="sub" data-i18n="dept5">Social Studies</div>
+                        <div class="dept-lbl">M.A., B.Ed. · 11 yrs</div>
+                    </div>
+                </div>
+                <div class="fac-card">
+                    <div class="fac-avatar">👩‍🔬</div>
+                    <div class="fac-info">
+                        <h4>Mrs. Deepa Iyer</h4>
+                        <div class="sub">Chemistry</div>
+                        <div class="dept-lbl">M.Sc., B.Ed. · 16 yrs</div>
+                    </div>
+                </div>
+                <div class="fac-card">
+                    <div class="fac-avatar">👨‍💼</div>
+                    <div class="fac-info">
+                        <h4>Mr. Anil Mehta</h4>
+                        <div class="sub">Commerce</div>
+                        <div class="dept-lbl">M.Com., B.Ed. · 13 yrs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+        <div class="page-section">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="memories">📸 Memories</div>
+                <h2 data-i18n="galleryTitle">Photo & Video Gallery <span class="dyn-badge">⚡ Dynamic</span></h2>
+                <p data-i18n="galleryDesc">Capturing moments that define the Greenfield experience</p>
+            </div>
+            <div class="admin-panel">
+                <h4 data-i18n="adminGal">🛠 Admin Panel — Upload to Gallery</h4>
+                <div class="admin-controls"><input type="text" id="gal-title" placeholder="Photo title..."
+                        style="width:200px" data-i18n-ph="galTitlePh"><select id="gal-cat">
+                        <option data-i18n="catEvents">Events</option>
+                        <option data-i18n="catCampus">Campus</option>
+                        <option data-i18n="catSports">Sports</option>
+                        <option data-i18n="catAcademics">Academics</option>
+                        <option data-i18n="catCultural">Cultural</option>
+                    </select><button class="btn btn-primary btn-sm" onclick="addGalleryItem()" data-i18n="addPhotoBtn">+
+                        Add Photo</button></div>
+            </div>
+            <div class="gallery-controls"><button class="gallery-btn active" onclick="filterGallery('All',this)"
+                    data-i18n="catAll">All</button><button class="gallery-btn" onclick="filterGallery('Events',this)"
+                    data-i18n="catEvents">Events</button><button class="gallery-btn"
+                    onclick="filterGallery('Campus',this)" data-i18n="catCampus">Campus</button><button
+                    class="gallery-btn" onclick="filterGallery('Sports',this)"
+                    data-i18n="catSports">Sports</button><button class="gallery-btn"
+                    onclick="filterGallery('Academics',this)" data-i18n="catAcademics">Academics</button><button
+                    class="gallery-btn" onclick="filterGallery('Cultural',this)"
+                    data-i18n="catCultural">Cultural</button></div>
+            <div class="gallery-grid" id="gallery-grid">
+                <div class="g-item tall" data-cat="Events">🎭<span class="gi-label">Annual Day 2024</span>
+                    <div class="g-overlay"><span>Annual Day 2024</span></div>
+                </div>
+                <div class="g-item" data-cat="Sports">⚽<span class="gi-label">Sports Day</span>
+                    <div class="g-overlay"><span>Sports Day 2024</span></div>
+                </div>
+                <div class="g-item" data-cat="Campus">🏫<span class="gi-label">School Campus</span>
+                    <div class="g-overlay"><span>Main Building</span></div>
+                </div>
+                <div class="g-item" data-cat="Academics">🔬<span class="gi-label">Science Lab</span>
+                    <div class="g-overlay"><span>Chemistry Lab</span></div>
+                </div>
+                <div class="g-item" data-cat="Cultural">🎵<span class="gi-label">Music Fest</span>
+                    <div class="g-overlay"><span>Music Fest</span></div>
+                </div>
+                <div class="g-item" data-cat="Sports">🏊<span class="gi-label">Swimming</span>
+                    <div class="g-overlay"><span>Swimming Gala</span></div>
+                </div>
+                <div class="g-item tall" data-cat="Campus">🌳<span class="gi-label">Campus Garden</span>
+                    <div class="g-overlay"><span>Green Campus</span></div>
+                </div>
+                <div class="g-item" data-cat="Events">🏆<span class="gi-label">Prize Day</span>
+                    <div class="g-overlay"><span>Prize Day 2024</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOTICES -->
+    <section id="notices">
+        <div class="page-section">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="updates">🔔 Updates</div>
+                <h2 data-i18n="noticesTitle">Notices & Announcements <span class="dyn-badge">⚡ Dynamic</span></h2>
+                <p data-i18n="noticesDesc">Circulars, exam updates, holidays, and school events</p>
+            </div>
+            <div class="admin-panel">
+                <h4 data-i18n="adminNotice">🛠 Admin Panel — Post New Notice</h4>
+                <div class="admin-controls"><input type="text" id="not-title" placeholder="Notice title..."
+                        style="width:240px" data-i18n-ph="notTitlePh"><select id="not-type">
+                        <option data-i18n="typeEvent">Event</option>
+                        <option data-i18n="typeExam">Exam</option>
+                        <option data-i18n="typeHoliday">Holiday</option>
+                        <option data-i18n="typeUrgent">Urgent</option>
+                    </select><input type="date" id="not-date" style="width:150px"><button class="btn btn-primary btn-sm"
+                        onclick="addNotice()" data-i18n="postNoticeBtn">📢 Post Notice</button></div>
+            </div>
+            <div class="notices-layout">
+                <div class="notice-list" id="notice-list">
+                    <div class="notice-item urgent">
+                        <div class="n-date">
+                            <div class="day">31</div>
+                            <div class="mon">Mar</div>
+                        </div>
+                        <div class="n-content">
+                            <h4 data-i18n="not1h">Last Date — Admission Form 2025-26</h4>
+                            <p data-i18n="not1p">Submit completed forms with documents by March 31, 2025.</p>
+                            <div class="pills"><span class="pill pill-urgent" data-i18n="typeUrgent">Urgent</span></div>
+                        </div>
+                    </div>
+                    <div class="notice-item new">
+                        <div class="n-date">
+                            <div class="day">15</div>
+                            <div class="mon">Feb</div>
+                        </div>
+                        <div class="n-content">
+                            <h4 data-i18n="not2h">Class X & XII Board Practical Exams Begin</h4>
+                            <p data-i18n="not2p">CBSE practicals commence February 15, 2025. Carry school ID.</p>
+                            <div class="pills"><span class="pill pill-exam" data-i18n="typeExam">Exam</span></div>
+                        </div>
+                    </div>
+                    <div class="notice-item">
+                        <div class="n-date">
+                            <div class="day">26</div>
+                            <div class="mon">Jan</div>
+                        </div>
+                        <div class="n-content">
+                            <h4 data-i18n="not3h">Republic Day — School Holiday</h4>
+                            <p data-i18n="not3p">Flag hoisting ceremony at 8:00 AM on January 26.</p>
+                            <div class="pills"><span class="pill pill-holiday" data-i18n="typeHoliday">Holiday</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notice-item">
+                        <div class="n-date">
+                            <div class="day">20</div>
+                            <div class="mon">Dec</div>
+                        </div>
+                        <div class="n-content">
+                            <h4 data-i18n="not4h">Annual Day — "Colours of India"</h4>
+                            <p data-i18n="not4p">December 20 at 5:00 PM in the school auditorium.</p>
+                            <div class="pills"><span class="pill pill-event" data-i18n="typeEvent">Event</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sidebar-card">
+                        <h3 data-i18n="upcomingEvents">📅 Upcoming Events</h3>
+                        <div class="ev-item"><span class="ev-dot"></span><span data-i18n="ev1">Annual Day — Dec
+                                20</span></div>
+                        <div class="ev-item"><span class="ev-dot"></span><span data-i18n="ev2">Science Exhibition — Dec
+                                5</span></div>
+                        <div class="ev-item"><span class="ev-dot"></span><span data-i18n="ev3">Board Practicals — Feb
+                                15</span></div>
+                        <div class="ev-item"><span class="ev-dot"></span><span data-i18n="ev4">PTM — Jan 18</span></div>
+                        <div class="ev-item"><span class="ev-dot"></span><span data-i18n="ev5">Sports Day — Nov
+                                28</span></div>
+                    </div>
+                    <div class="sidebar-card">
+                        <h3 data-i18n="holidayList">🗓 Holiday List</h3>
+                        <div class="hol-item"><span data-i18n="hol1">Republic Day</span><span class="hol-date">Jan
+                                26</span></div>
+                        <div class="hol-item"><span data-i18n="hol2">Holi</span><span class="hol-date">Mar 25</span>
+                        </div>
+                        <div class="hol-item"><span data-i18n="hol3">Good Friday</span><span class="hol-date">Apr
+                                18</span></div>
+                        <div class="hol-item"><span data-i18n="hol5">Independence Day</span><span class="hol-date">Aug
+                                15</span></div>
+                        <div class="hol-item"><span data-i18n="hol6">Diwali</span><span class="hol-date">Oct
+                                20-21</span></div>
+                        <div class="hol-item"><span data-i18n="hol7">Christmas</span><span class="hol-date">Dec
+                                25</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="page-section">
+            <div class="section-header">
+                <div class="section-tag" data-i18n="getInTouch">📞 Get In Touch</div>
+                <h2 data-i18n="contactTitle">Contact Us <span class="dyn-badge">⚡ Form Dynamic</span></h2>
+                <p data-i18n="contactDesc">Reach out for admissions, queries, or feedback</p>
+            </div>
+            <div class="contact-grid">
+                <div>
+                    <div class="c-card">
+                        <div class="c-icon">📍</div>
+                        <div>
+                            <h4 data-i18n="address">Address</h4>
+                            <p data-i18n="addressVal">Plot No. 45, Greenfield Road, Madhapur,<br>Hyderabad – 500 081,
+                                Telangana</p>
+                        </div>
+                    </div>
+                    <div class="c-card">
+                        <div class="c-icon">📞</div>
+                        <div>
+                            <h4 data-i18n="phone">Phone</h4>
+                            <p>+91 40 4567 8900<br>Admissions: +91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="c-card">
+                        <div class="c-icon">✉️</div>
+                        <div>
+                            <h4 data-i18n="email">Email</h4>
+                            <p>info@greenfield.edu.in<br>admissions@greenfield.edu.in</p>
+                        </div>
+                    </div>
+                    <div class="c-card">
+                        <div class="c-icon">⏰</div>
+                        <div>
+                            <h4 data-i18n="officeHours">Office Hours</h4>
+                            <p data-i18n="officeHoursVal">Mon–Fri: 8AM–4PM · Sat: 9AM–1PM</p>
+                        </div>
+                    </div>
+                    <div class="map-box">🗺️<p data-i18n="mapLabel">Google Maps — Greenfield, Madhapur</p><button
+                            class="btn btn-primary btn-sm" onclick="window.open('https://maps.google.com')"
+                            data-i18n="openMap">Open in Maps →</button></div>
+                </div>
+                <div class="contact-form">
+                    <h3 data-i18n="sendMsg">Send us a Message</h3>
+                    <p class="sub" data-i18n="sendMsgDesc">Fill in the form and our team will get back to you within 24
+                        hours.</p>
+                    <div class="form-row">
+                        <div class="form-group"><label data-i18n="fname">First Name *</label><input type="text"
+                                data-i18n-ph="fnamePh" placeholder="Rahul"></div>
+                        <div class="form-group"><label data-i18n="lname">Last Name *</label><input type="text"
+                                data-i18n-ph="lnamePh" placeholder="Sharma"></div>
+                    </div>
+                    <div class="form-group"><label data-i18n="emailLbl">Email *</label><input type="email"
+                            placeholder="rahul@example.com"></div>
+                    <div class="form-group"><label data-i18n="phoneLbl">Phone</label><input type="tel"
+                            placeholder="+91 98765 43210"></div>
+                    <div class="form-group"><label data-i18n="enquiryType">Enquiry Type *</label><select>
+                            <option data-i18n="selTopic">Select a topic...</option>
+                            <option data-i18n="enqAdm">Admission Enquiry</option>
+                            <option data-i18n="enqFee">Fee Related</option>
+                            <option data-i18n="enqAca">Academic Query</option>
+                            <option data-i18n="enqFb">Feedback</option>
+                        </select></div>
+                    <div class="form-group"><label data-i18n="msgLbl">Message *</label><textarea data-i18n-ph="msgPh"
+                            placeholder="Write your message..."></textarea></div><button class="btn btn-primary"
+                        style="width:100%" onclick="submitForm()" data-i18n="sendBtn">📨 Send Message</button>
+                    <div class="form-success" id="form-success">✅ <span data-i18n="formSuccess">Thank you! We'll respond
+                            within 24 hours.</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>🏫 <span data-i18n="schoolName">Greenfield Public School</span></h3>
+                <p data-i18n="footerDesc">Nearly five decades of academic excellence and holistic development. CBSE
+                    Affiliated · Est. 1975 · Hyderabad, Telangana</p>
+                <div class="socials"><a class="soc">📘</a><a class="soc">📸</a><a class="soc">▶️</a><a
+                        class="soc">🐦</a></div>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="quickLinks">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a onclick="showSection('home')" data-i18n="navHome">Home</a></li>
+                    <li><a onclick="showSection('about')" data-i18n="navAbout">About Us</a></li>
+                    <li><a onclick="showSection('admissions')" data-i18n="navAdmissions">Admissions</a></li>
+                    <li><a onclick="showSection('academics')" data-i18n="navAcademics">Academics</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="resources">Resources</h4>
+                <ul class="footer-links">
+                    <li><a data-i18n="resCal">Academic Calendar</a></li>
+                    <li><a data-i18n="resExam">Exam Timetable</a></li>
+                    <li><a data-i18n="resFee">Fee Payment</a></li>
+                    <li><a data-i18n="resResult">Result Portal</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="navContact">Contact</h4>
+                <ul class="footer-links">
+                    <li><a>📞 +91 40 4567 8900</a></li>
+                    <li><a>✉️ info@greenfield.edu.in</a></li>
+                    <li><a onclick="showSection('notices')" data-i18n="latestNotices">📢 Notices</a></li>
+                    <li><a onclick="showSection('contact')" data-i18n="navContact">Enquiry Form</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><span data-i18n="copyright">© 2024 Greenfield Public School. All rights
+                reserved.</span><span>CBSE Affiliation No. 1234567</span></div>
+    </footer>
+
+    <script>
+        // ════════════════════════════════════════════
+        //  TRANSLATIONS (compact — EN only shown, HI/TE same as v1)
+        // ════════════════════════════════════════════
+        const T = {
+            en: {
+                schoolName: "Greenfield Public School", schoolTagline: "Excellence in Education Since 1975",
+                navHome: "Home", navAbout: "About Us", navAdmissions: "Admissions", navAcademics: "Academics",
+                navGallery: "Gallery", navNotices: "Notices", navContact: "Contact", navApply: "Apply Now",
+                heroBadge: "🏅 CBSE Affiliated · School No. 1234567",
+                heroTitle: 'Shaping <em>Future Leaders</em><br>Through Excellence',
+                heroDesc: "At Greenfield, we nurture curious minds, build character, and empower every student to achieve their highest potential.",
+                heroCta1: "🎓 Apply for Admission", heroCta2: "Learn More →",
+                slide2badge: "📚 Academic Excellence", slide2title: 'CBSE Curriculum<br><em>Reimagined</em>',
+                slide2desc: "Our innovative teaching methods blend NEP 2020 with technology-enabled learning and STEM focus.", slide2cta: "Explore Academics →",
+                slide3badge: "🏆 Board Results 2024", slide3title: '<em>98.4%</em> Pass Rate<br>Class X Board 2024',
+                slide3desc: "Topper scored 498/500. 24 students achieved distinction. We are proud of every student.", slide3cta: "View Results →",
+                slide4badge: "⚽ Sports & Activities", slide4title: 'Champions on the<br><em>Field & Classroom</em>',
+                slide4desc: "National-level athletes, state chess champions, and inter-school winners — Greenfield nurtures excellence beyond academics.", slide4cta: "View Gallery →",
+                slide5badge: "🎭 Annual Day 2024", slide5title: 'Join Us for<br><em>"Colours of India"</em>',
+                slide5desc: "December 20, 2024 • 5:00 PM • School Auditorium. Cultural performances, awards, and memories.", slide5cta: "View All Events →",
+                stat1: "Students", stat2: "Faculty", stat3: "Years Legacy", stat4: "Board Result",
+                qlResults: "Results & Notices", important: "⚡ Important",
+                noticeStrip: "<strong>Admission 2025-26:</strong> Last date to submit forms is <strong>March 31, 2025.</strong>",
+                latestNews: "📰 Latest News", newsTitle: 'News & Highlights <span class="dyn-badge">⚡ Dynamic</span>',
+                newsDesc: "Stay updated with the latest at Greenfield Public School",
+                adminAnn: "🛠 Admin Panel — Add Announcement", annPh: "Announcement title...", addBtn: "+ Add",
+                typeEvent: "Event", typeExam: "Exam", typeHoliday: "Holiday", typeUrgent: "Urgent",
+                tagAchievement: "Achievement", tagResults: "Results", readMore: "📖 Read more",
+                news1title: "National Science Olympiad — Gold Medal", news1desc: "Riya Sharma of Class XII secured 1st rank at the National Science Olympiad in New Delhi.",
+                news2title: 'Annual Day 2024 — "Colours of India"', news2desc: "Grand Annual Day celebration scheduled for December 20 with cultural performances and awards.",
+                news3title: "Class X & XII Board Results 2024", news3desc: "98.4% pass rate in Class X and 99.1% in Class XII. School topper scored 498/500.",
+                whyTag: "⭐ Why Greenfield", whyTitle: "Why Families Choose Us", whyDesc: "Scroll to discover what makes Greenfield the first choice for 2,400+ families",
+                why1h: "CBSE Excellence", why1p: "Consistently above 98% board results for 12 consecutive years.",
+                why2h: "STEM-First Approach", why2p: "Robotics lab, coding from Class I, and tech championships.",
+                why3h: "Holistic Development", why3p: "Sports, arts, drama, music — every child discovers their talent.",
+                why4h: "Expert Faculty", why4p: "120+ qualified educators with 10-20+ years experience.",
+                why5h: "World-Class Campus", why5p: "8-acre campus with smart classrooms, labs, pool, and auditorium.",
+                why6h: "Safe Environment", why6p: "CCTV, GPS buses, trained counselors, and anti-bullying committee.",
+                why7h: "Parent Connect App", why7p: "Real-time attendance, marks, fees — all on one app.",
+                why8h: "Alumni Network", why8p: "3,000+ alumni across IITs, IIMs, AIIMS, and global universities.",
+                testTag: "💬 Parent Reviews", testTitle: "What Parents & Students Say", testDesc: "Hear from the families who chose Greenfield and saw the difference firsthand.",
+                testRating: "Parent Rating", testSatisfied: "Families Satisfied", testRecommend: "Would Recommend", testFamilies: "Happy Families",
+                test1: '"Greenfield completely transformed my daughter\'s confidence. She went from being shy to leading the school debate team. The teachers truly care about every child."',
+                test2: '"The STEM programme is exceptional. My son built his first robot in Class V! His curiosity and problem-solving skills have grown beyond what I imagined."',
+                test3: '"I scored 98.6% in Class XII boards! The faculty\'s dedication is unmatched — available even on weekends for doubt sessions. Greenfield made my IIT dream a reality."',
+                test4: '"As a parent of three Greenfield students, I\'ve seen consistent quality over 10 years. Safe campus, proactive communication, and values instilled for life."',
+                testRole1: "Parent of Class IX Student", testRole2: "Parent of Class VII Student", testRole3: "Class XII Alumni, IIT Delhi", testRole4: "Parent · 10+ Years Greenfield Family",
+                cnt1: "Students Enrolled", cnt2: "Expert Faculty", cnt3: "Years of Excellence", cnt4: "Proud Alumni", cnt5: "Awards Won", cnt6: "Board Pass Rate",
+                spotTag: "🌟 Spotlight", spotTitle: "Student Spotlight", spotDesc: "Celebrating the extraordinary achievements of our students",
+                spotBadge: "⭐ Star of the Year", spot1name: "Riya Sharma", spot1role: "Class XII | Science | School Topper",
+                spot1desc: '"Riya achieved 498/500 in CBSE boards, won the National Science Olympiad gold medal, and secured admission to IIT Bombay. A true all-rounder."',
+                spot2name: "Aryan Verma", spot2grade: "Class X | Chess Champion", spot2desc: "State-level chess champion 2024. Aspires to become India's youngest Grandmaster.",
+                spot3name: "Priya Iyer", spot3grade: "Class VIII | Arts Star", spot3desc: "National painting competition winner. Work selected for NCERT textbook illustration.",
+                spot4name: "Rahul Nair", spot4grade: "Class XI | Sports Star", spot4desc: "State swimming champion. Selected for Telangana U-19 team.",
+                spot5name: "Ananya Singh", spot5grade: "Class IX | Tech Innovator", spot5desc: "Built an AI-powered attendance app at age 14. Won Hyderabad Young Innovator Award 2024.",
+                calTag: "📅 Schedule", calTitle: "Events Calendar", calDesc: "Plan ahead with all school events, exams, and important dates",
+                upcomingEvents: "📅 Upcoming Events", ev1: "Annual Day — Dec 20", ev2: "Science Exhibition — Dec 5", ev3: "Board Practicals — Feb 15", ev4: "PTM — Jan 18", ev5: "Sports Day — Nov 28", ev5r: "Republic Day",
+                calDeadline: "Admission Deadline", calDeadlineP: "Last date for 2025-26 forms",
+                baTag: "🏫 Then vs Now", baTitle: "Campus Transformation", baDesc: "Drag the slider to see how Greenfield has transformed over the decades",
+                ba1975: "1975 Campus", ba2024: "2024 Campus", baDragHint: "← Drag the handle to compare →",
+                alumniTag: "🎓 Alumni", alumniTitle: "Our Proud Alumni", alumniDesc: "Greenfielders making a difference across medicine, technology, arts, and public service",
+                ourStory: "🏛 Our Story", aboutTitle: 'About Greenfield <span class="sta-badge">📄 Static</span>',
+                aboutH2: "A Legacy of Academic Excellence",
+                aboutP1: "Founded in 1975 by Mr. Rajendra Prasad Sharma, Greenfield began with 80 students and a vision to bring quality education to Hyderabad.",
+                aboutP2: "Today we serve over 2,400 students from Nursery to Class XII, backed by 120+ educators across 8 acres.",
+                aboutP3: "Our alumni are doctors, engineers, artists, entrepreneurs and civil servants worldwide.",
+                downloadBrochure: "Download School Brochure 📥",
+                vision: "Our Vision", visionText: "To be a globally recognized institution that empowers every student with knowledge, values and skills.",
+                mission: "Our Mission", missionText: "To provide a safe, inclusive, stimulating learning environment nurturing confident, ethical citizens.",
+                principalName: "Dr. Suresh Kumar Rao", principalTitle: "Principal, Greenfield Public School",
+                principalMsg: '"At Greenfield, every child carries the seeds of greatness. Our role is to provide the right environment to help those seeds bloom. Welcome to the Greenfield family."',
+                infra: "Infrastructure & Facilities", tagSci: "Science", tagLib: "Knowledge", tagSport: "Sports", tagArts: "Arts",
+                infra1h: "Modern Laboratories", infra1p: "Physics, Chemistry, Biology, and Computer labs with latest instruments.",
+                infra2h: "Central Library", infra2p: "15,000+ books, digital stations, and e-library.",
+                infra3h: "Sports Complex", infra3p: "Cricket, football, basketball, swimming pool, and badminton.",
+                infra4h: "Arts & Music Room", infra4p: "Fine arts, music, dance, and theatre spaces.",
+                joinUs: "🎓 Join Us", admTitle: 'Admissions 2025–26 <span class="sta-badge">📄 Static</span>', admDesc: "Applications open for Nursery to Class IX and Class XI.",
+                admProcess: "Admission Process",
+                step1h: "Download Form", step1p: "Get the admission form or visit the school office.",
+                step2h: "Fill & Submit", step2p: "Complete the form with required documents.",
+                step3h: "Entrance Test", step3p: "Written test for eligible candidates (Class III+).",
+                step4h: "Counselling", step4p: "Counselling session with the Principal.",
+                step5h: "Fee Payment", step5p: "Pay fee and collect student ID and handbook.",
+                feeStruct: "Fee Structure 2025–26", feeClass: "Class", feeTuition: "Tuition (Annual)", feeDev: "Development Fee", feeTrans: "Transport", feeTotal: "Total",
+                feeR1: "Nursery – KG", feeR2: "Class I – V", feeR3: "Class VI – VIII", feeR4: "Class IX – X", feeR5: "Class XI–XII (Sci)",
+                downloadForms: "Download Forms", dlBtn: "⬇ Download", dl1h: "Admission Form", dl2h: "Fee Structure", dl3h: "Scholarship Form", dl4h: "Prospectus",
+                learning: "📚 Learning", acaTitle: 'Academics <span class="sta-badge">📄 Static</span> <span class="dyn-badge">⚡ Faculty Dynamic</span>', acaDesc: "CBSE curriculum delivered through innovative, student-centred teaching",
+                departments: "Our Departments", dept1: "Science & Technology", dept2: "Mathematics", dept3: "Languages", dept4: "Computer Science", dept5: "Social Studies", dept6: "Arts & Craft", dept7: "Music & Dance", dept8: "Physical Ed.",
+                ourFaculty: 'Our Faculty <span class="dyn-badge">⚡ Dynamic</span>', adminFac: "🛠 Admin — Add Faculty", addFacBtn: "+ Add Faculty", facNamePh: "Faculty name...", facSubjPh: "Subject...", facExpPh: "Exp. years",
+                memories: "📸 Memories", galleryTitle: 'Photo & Video Gallery <span class="dyn-badge">⚡ Dynamic</span>', galleryDesc: "Capturing moments that define the Greenfield experience",
+                adminGal: "🛠 Admin — Upload to Gallery", galTitlePh: "Photo title...", addPhotoBtn: "+ Add Photo",
+                catAll: "All", catEvents: "Events", catCampus: "Campus", catSports: "Sports", catAcademics: "Academics", catCultural: "Cultural",
+                updates: "🔔 Updates", noticesTitle: 'Notices & Announcements <span class="dyn-badge">⚡ Dynamic</span>', noticesDesc: "Circulars, exams, holidays, and events",
+                adminNotice: "🛠 Admin — Post Notice", notTitlePh: "Notice title...", postNoticeBtn: "📢 Post Notice",
+                not1h: "Last Date — Admission Form 2025-26", not1p: "Submit forms with documents by March 31, 2025.",
+                not2h: "Class X & XII Board Practicals Begin", not2p: "CBSE practicals from February 15, 2025.",
+                not3h: "Republic Day — Holiday", not3p: "Flag hoisting at 8:00 AM on January 26.",
+                not4h: 'Annual Day — "Colours of India"', not4p: "December 20 at 5:00 PM in the school auditorium.",
+                holidayList: "🗓 Holiday List", hol1: "Republic Day", hol2: "Holi", hol3: "Good Friday", hol5: "Independence Day", hol6: "Diwali", hol7: "Christmas",
+                getInTouch: "📞 Get In Touch", contactTitle: 'Contact Us <span class="dyn-badge">⚡ Form Dynamic</span>', contactDesc: "Reach out for admissions, queries, or feedback",
+                address: "Address", addressVal: "Plot No. 45, Greenfield Road, Madhapur,<br>Hyderabad – 500 081, Telangana",
+                phone: "Phone", email: "Email", officeHours: "Office Hours", officeHoursVal: "Mon–Fri: 8AM–4PM · Sat: 9AM–1PM",
+                mapLabel: "Google Maps — Greenfield, Madhapur", openMap: "Open in Maps →",
+                sendMsg: "Send us a Message", sendMsgDesc: "Fill in the form and we'll respond within 24 hours.",
+                fname: "First Name *", lname: "Last Name *", fnamePh: "Rahul", lnamePh: "Sharma",
+                emailLbl: "Email *", phoneLbl: "Phone", enquiryType: "Enquiry Type *",
+                selTopic: "Select a topic...", enqAdm: "Admission Enquiry", enqFee: "Fee Related", enqAca: "Academic Query", enqFb: "Feedback",
+                msgLbl: "Message *", msgPh: "Write your message...", sendBtn: "📨 Send Message", formSuccess: "Thank you! We'll respond within 24 hours.",
+                quickLinks: "Quick Links", resources: "Resources", resCal: "Academic Calendar", resExam: "Exam Timetable", resFee: "Fee Payment", resResult: "Result Portal", latestNotices: "📢 Notices",
+                footerDesc: "Nearly five decades of academic excellence and holistic development. CBSE Affiliated · Est. 1975 · Hyderabad",
+                copyright: "© 2024 Greenfield Public School. All rights reserved.",
+            }
+        };
+
+        // Hindi & Telugu — keep same structure, add translations
+        T.hi = {
+            ...T.en,
+            schoolName: "ग्रीनफील्ड पब्लिक स्कूल", schoolTagline: "1975 से शिक्षा में उत्कृष्टता",
+            navHome: "होम", navAbout: "हमारे बारे में", navAdmissions: "प्रवेश", navAcademics: "शिक्षा",
+            navGallery: "गैलरी", navNotices: "सूचनाएँ", navContact: "संपर्क", navApply: "आवेदन करें",
+            heroBadge: "🏅 CBSE मान्यता · विद्यालय क्र. 1234567",
+            heroTitle: '<em>भावी नेताओं</em> को<br>उत्कृष्टता से आकार देना',
+            heroDesc: "ग्रीनफील्ड में हम जिज्ञासु मनों का पोषण करते हैं, चरित्र निर्माण करते हैं और छात्रों को उनकी उच्चतम क्षमता प्राप्त करने के लिए सशक्त बनाते हैं।",
+            heroCta1: "🎓 प्रवेश के लिए आवेदन करें", heroCta2: "अधिक जानें →",
+            stat1: "छात्र", stat2: "शिक्षक", stat3: "वर्षों की विरासत", stat4: "बोर्ड परिणाम",
+            whyTitle: "परिवार हमें क्यों चुनते हैं", whyDesc: "जानें कि ग्रीनफील्ड 2,400+ परिवारों की पहली पसंद क्यों है",
+            testTitle: "माता-पिता और छात्र क्या कहते हैं", testDesc: "उन परिवारों से सुनें जिन्होंने ग्रीनफील्ड चुना और अंतर देखा।",
+            spotTitle: "छात्र स्पॉटलाइट", spotDesc: "हमारे छात्रों की असाधारण उपलब्धियाँ",
+            calTitle: "कार्यक्रम कैलेंडर", calDesc: "विद्यालय कार्यक्रम, परीक्षा और महत्वपूर्ण तिथियाँ",
+            baTitle: "परिसर परिवर्तन", baDesc: "स्लाइडर खींचें और ग्रीनफील्ड के बदलाव को देखें",
+            alumniTitle: "हमारे गौरवशाली पूर्व छात्र",
+            important: "⚡ महत्वपूर्ण", latestNews: "📰 ताज़ा समाचार", noticeStrip: "<strong>प्रवेश 2025-26:</strong> आवेदन की अंतिम तिथि <strong>31 मार्च 2025</strong>।",
+            sendMsg: "हमें संदेश भेजें", sendBtn: "📨 संदेश भेजें", formSuccess: "धन्यवाद! हम 24 घंटे में उत्तर देंगे।",
+            copyright: "© 2024 ग्रीनफील्ड पब्लिक स्कूल। सर्वाधिकार सुरक्षित।",
+        };
+        T.te = {
+            ...T.en,
+            schoolName: "గ్రీన్‌ఫీల్డ్ పబ్లిక్ స్కూల్", schoolTagline: "1975 నుండి విద్యలో శ్రేష్ఠత",
+            navHome: "హోమ్", navAbout: "మా గురించి", navAdmissions: "ప్రవేశాలు", navAcademics: "విద్య",
+            navGallery: "గ్యాలరీ", navNotices: "నోటీసులు", navContact: "సంప్రదించండి", navApply: "దరఖాస్తు చేయండి",
+            heroBadge: "🏅 CBSE అనుబంధిత · పాఠశాల సంఖ్య 1234567",
+            heroTitle: '<em>భావి నాయకులను</em><br>శ్రేష్ఠతతో తీర్చిదిద్దుతున్నాం',
+            heroDesc: "గ్రీన్‌ఫీల్డ్‌లో మేము విద్యార్థులను పోషిస్తాం, వ్యక్తిత్వాన్ని నిర్మిస్తాం మరియు వారు తమ సామర్థ్యాన్ని సాధించడానికి సాధికారత కల్పిస్తాం.",
+            heroCta1: "🎓 ప్రవేశానికి దరఖాస్తు చేయండి", heroCta2: "మరింత తెలుసుకోండి →",
+            stat1: "విద్యార్థులు", stat2: "అధ్యాపకులు", stat3: "సంవత్సరాల వారసత్వం", stat4: "బోర్డు ఫలితం",
+            whyTitle: "కుటుంబాలు మమ్మల్ని ఎందుకు ఎంచుకుంటాయి",
+            testTitle: "తల్లిదండ్రులు మరియు విద్యార్థులు ఏమి చెప్తున్నారు",
+            spotTitle: "విద్యార్థి స్పాట్‌లైట్", calTitle: "కార్యక్రమాల క్యాలెండర్",
+            baTitle: "క్యాంపస్ పరివర్తన", alumniTitle: "మా గర్వకారణ పూర్వ విద్యార్థులు",
+            important: "⚡ ముఖ్యమైనది", latestNews: "📰 తాజా వార్తలు",
+            noticeStrip: "<strong>ప్రవేశం 2025-26:</strong> దరఖాస్తుల చివరి తేదీ <strong>మార్చి 31, 2025.</strong>",
+            sendMsg: "మాకు సందేశం పంపండి", sendBtn: "📨 సందేశం పంపండి", formSuccess: "ధన్యవాదాలు! మేము 24 గంటల్లో స్పందిస్తాం.",
+            copyright: "© 2024 గ్రీన్‌ఫీల్డ్ పబ్లిక్ స్కూల్. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.",
+        };
+
+        // ════════════════════════════════════════════
+        //  LANGUAGE ENGINE
+        // ════════════════════════════════════════════
+        let currentLang = 'en';
+        function setLang(lang) {
+            currentLang = lang;
+            document.body.className = lang !== 'en' ? 'lang-' + lang : '';
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            const t = T[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const k = el.getAttribute('data-i18n');
+                if (t[k] !== undefined) el.innerHTML = t[k];
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const k = el.getAttribute('data-i18n-ph');
+                if (t[k] !== undefined) el.placeholder = t[k];
+            });
+        }
+
+        // ════════════════════════════════════════════
+        //  NAV
+        // ════════════════════════════════════════════
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const el = document.getElementById('nav-' + id);
+            if (el) el.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function openMobileNav() { document.getElementById('mobileNav').classList.add('open') }
+        function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open') }
+
+        // ════════════════════════════════════════════
+        //  HERO SLIDER
+        // ════════════════════════════════════════════
+        let currentSlide = 0, slideTimer;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        function goToSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        function changeSlide(d) { clearInterval(slideTimer); goToSlide(currentSlide + d); startSlider() }
+        function startSlider() { slideTimer = setInterval(() => goToSlide(currentSlide + 1), 5500) }
+        startSlider();
+
+        // ════════════════════════════════════════════
+        //  STATS BAR — animate on first view
+        // ════════════════════════════════════════════
+        const statNums = document.querySelectorAll('.stat-num[data-target]');
+        let statsAnimated = false;
+        function animateStats() {
+            if (statsAnimated) return; statsAnimated = true;
+            statNums.forEach(el => {
+                const target = +el.dataset.target, suffix = el.dataset.suffix || '';
+                let current = 0, step = target / 60;
+                const t = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    el.textContent = Math.floor(current).toLocaleString('en-IN') + suffix;
+                    if (current >= target) clearInterval(t);
+                }, 25);
+            });
+        }
+        setTimeout(animateStats, 600);
+
+        // ════════════════════════════════════════════
+        //  COUNTER STRIP (animated on visible)
+        // ════════════════════════════════════════════
+        let countersAnimated = false;
+        const counterNums = document.querySelectorAll('.count-num');
+        function animateCounters() {
+            if (countersAnimated) return; countersAnimated = true;
+            counterNums.forEach(el => {
+                const target = +el.dataset.target, suffix = el.dataset.suffix || '';
+                let current = 0, step = Math.max(1, target / 80);
+                const t = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    el.textContent = Math.floor(current).toLocaleString('en-IN') + suffix;
+                    if (current >= target) clearInterval(t);
+                }, 20);
+            });
+        }
+        const counterStrip = document.querySelector('.counter-strip');
+        const counterObs = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) animateCounters();
+        }, { threshold: .3 });
+        if (counterStrip) counterObs.observe(counterStrip);
+
+        // ════════════════════════════════════════════
+        //  TESTIMONIALS SLIDER
+        // ════════════════════════════════════════════
+        let currentTest = 0, testTimer;
+        const testCards = document.querySelectorAll('.test-card');
+        const testDots = document.querySelectorAll('.t-dot');
+        function goToTest(n) {
+            testCards[currentTest].classList.remove('active');
+            testDots[currentTest].classList.remove('active');
+            currentTest = n % testCards.length;
+            testCards[currentTest].classList.add('active');
+            testDots[currentTest].classList.add('active');
+        }
+        testTimer = setInterval(() => goToTest((currentTest + 1) % testCards.length), 4500);
+
+        // ════════════════════════════════════════════
+        //  WHY SCROLL — drag to scroll
+        // ════════════════════════════════════════════
+        const ws = document.getElementById('whyScroll');
+        let isDragging = false, startX, scrollLeft;
+        ws.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX - ws.offsetLeft; scrollLeft = ws.scrollLeft });
+        ws.addEventListener('mouseleave', () => isDragging = false);
+        ws.addEventListener('mouseup', () => isDragging = false);
+        ws.addEventListener('mousemove', e => {
+            if (!isDragging) return; e.preventDefault();
+            const x = e.pageX - ws.offsetLeft; ws.scrollLeft = scrollLeft - (x - startX) * 1.5;
+        });
+
+        // ════════════════════════════════════════════
+        //  EVENTS CALENDAR
+        // ════════════════════════════════════════════
+        const eventDays = { 20: true, 5: true, 15: true, 18: true, 31: true, 1: true, 25: true };
+        let calYear = 2024, calMonth = 11;
+        function renderCal() {
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            document.getElementById('cal-month-label').textContent = `${monthNames[calMonth]} ${calYear}`;
+            const grid = document.getElementById('cal-grid'); grid.innerHTML = '';
+            const first = new Date(calYear, calMonth, 1).getDay();
+            const days = new Date(calYear, calMonth + 1, 0).getDate();
+            const today = new Date();
+            for (let i = 0; i < first; i++) { const c = document.createElement('div'); c.className = 'cal-cell other-month'; grid.appendChild(c) }
+            for (let d = 1; d <= days; d++) {
+                const c = document.createElement('div'); c.className = 'cal-cell';
+                c.textContent = d;
+                if (today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === d) c.classList.add('today');
+                if (eventDays[d]) c.classList.add('has-event');
+                grid.appendChild(c);
+            }
+        }
+        function changeMonth(d) {
+            calMonth += d;
+            if (calMonth > 11) { calMonth = 0; calYear++ }
+            if (calMonth < 0) { calMonth = 11; calYear-- }
+            renderCal();
+        }
+        renderCal();
+
+        // ════════════════════════════════════════════
+        //  BEFORE/AFTER SLIDER
+        // ════════════════════════════════════════════
+        const baContainer = document.getElementById('baContainer');
+        const baHandle = document.getElementById('baHandle');
+        const baAfter = baContainer ? baContainer.querySelector('.ba-after') : null;
+        let baDragging = false;
+        if (baContainer) {
+            baContainer.addEventListener('mousedown', () => baDragging = true);
+            document.addEventListener('mouseup', () => baDragging = false);
+            document.addEventListener('mousemove', e => {
+                if (!baDragging) return;
+                const rect = baContainer.getBoundingClientRect();
+                let pct = ((e.clientX - rect.left) / rect.width) * 100;
+                pct = Math.max(5, Math.min(95, pct));
+                baHandle.style.left = pct + '%';
+                if (baAfter) baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 ${pct}%)`;
+            });
+            baContainer.addEventListener('touchmove', e => {
+                const touch = e.touches[0];
+                const rect = baContainer.getBoundingClientRect();
+                let pct = ((touch.clientX - rect.left) / rect.width) * 100;
+                pct = Math.max(5, Math.min(95, pct));
+                baHandle.style.left = pct + '%';
+                if (baAfter) baAfter.style.clipPath = `inset(0 ${100 - pct}% 0 ${pct}%)`;
+            });
+        }
+
+        // ════════════════════════════════════════════
+        //  DYNAMIC FEATURES
+        // ════════════════════════════════════════════
+        function addAnnouncement() {
+            const title = document.getElementById('ann-title').value.trim();
+            const type = document.getElementById('ann-type').value;
+            if (!title) return;
+            const icons = { Event: '🎉', Exam: '📝', Holiday: '🗓', Urgent: '⚡' };
+            const card = document.createElement('div'); card.className = 'card'; card.style.animation = 'fadeUp .4s ease';
+            card.innerHTML = `<div class="card-img">${icons[type] || '📢'}</div><div class="card-body"><div class="card-tag">${type}</div><h3>${title}</h3><p>${currentLang === 'hi' ? 'अभी व्यवस्थापक द्वारा जोड़ा गया।' : currentLang === 'te' ? 'ఇప్పుడే జోడించారు.' : 'Added just now by admin.'}</p></div><div class="card-footer"><span>Today</span><span>📖 Read more</span></div>`;
+            document.getElementById('news-grid').prepend(card);
+            document.getElementById('ann-title').value = '';
+        }
+        function addFaculty() {
+            const name = document.getElementById('fac-name').value.trim();
+            const subj = document.getElementById('fac-subj').value.trim();
+            const exp = document.getElementById('fac-exp').value.trim();
+            if (!name || !subj) return;
+            const emojis = ['👨‍🏫', '👩‍🏫', '👨‍🔬', '👩‍🔬', '👨‍💻', '👩‍💻'];
+            const card = document.createElement('div'); card.className = 'fac-card'; card.style.animation = 'fadeUp .4s ease';
+            card.innerHTML = `<div class="fac-avatar">${emojis[Math.floor(Math.random() * emojis.length)]}</div><div class="fac-info"><h4>${name}</h4><div class="sub">${subj}</div><div class="dept-lbl">${exp || 'New Faculty'}</div></div>`;
+            document.getElementById('faculty-grid').prepend(card);
+            ['fac-name', 'fac-subj', 'fac-exp'].forEach(id => document.getElementById(id).value = '');
+        }
+        function filterGallery(cat, btn) {
+            document.querySelectorAll('.gallery-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+            document.querySelectorAll('.g-item').forEach(i => i.style.display = (cat === 'All' || i.dataset.cat === cat) ? '' : 'none');
+        }
+        function addGalleryItem() {
+            const title = document.getElementById('gal-title').value.trim();
+            const cat = document.getElementById('gal-cat').value; if (!title) return;
+            const icons = { Events: '🎉', Campus: '🏫', Sports: '🏅', Academics: '📚', Cultural: '🎭' };
+            const item = document.createElement('div'); item.className = 'g-item'; item.dataset.cat = cat; item.style.animation = 'fadeUp .4s ease';
+            item.innerHTML = `${icons[cat] || '📷'}<span class="gi-label">${title}</span><div class="g-overlay"><span>${title}</span></div>`;
+            document.getElementById('gallery-grid').prepend(item);
+            document.getElementById('gal-title').value = '';
+        }
+        function addNotice() {
+            const title = document.getElementById('not-title').value.trim();
+            const type = document.getElementById('not-type').value;
+            const dateVal = document.getElementById('not-date').value; if (!title) return;
+            const pc = { Event: 'pill-event', Exam: 'pill-exam', Holiday: 'pill-holiday', Urgent: 'pill-urgent' };
+            let day = '--', mon = '---';
+            if (dateVal) { const d = new Date(dateVal); day = d.getDate().toString().padStart(2, '0'); mon = d.toLocaleString('en', { month: 'short' }).toUpperCase() }
+            const item = document.createElement('div'); item.className = `notice-item ${type === 'Urgent' ? 'urgent' : 'new'}`; item.style.animation = 'fadeUp .4s ease';
+            item.innerHTML = `<div class="n-date"><div class="day">${day}</div><div class="mon">${mon}</div></div><div class="n-content"><h4>${title}</h4><p>${currentLang === 'hi' ? 'अभी पोस्ट किया गया।' : currentLang === 'te' ? 'ఇప్పుడే పోస్ట్ చేశారు.' : 'Posted just now.'}</p><div class="pills"><span class="pill ${pc[type] || 'pill-event'}">${type}</span></div></div>`;
+            document.getElementById('notice-list').prepend(item);
+            ['not-title', 'not-date'].forEach(id => document.getElementById(id).value = '');
+        }
+        function submitForm() { const s = document.getElementById('form-success'); s.classList.add('show'); setTimeout(() => s.classList.remove('show'), 4500) }
+
+        // ── CSS animation ──
+        document.head.insertAdjacentHTML('beforeend', '<style>@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}</style>');
+
+        // ════════════════════════════════════════════
+        //  LIVE SYNC — receives data from Sample.html
+        // ════════════════════════════════════════════
+        function applySchoolData(data) {
+            if (!data) return;
+            const s = data.school || {};
+            const c = data.contact || {};
+            const p = data.principal || {};
+            const ab = data.about || {};
+            const st = data.stats || {};
+            const br = data.branding || {};
+            const adm = data.admissions || {};
+
+            // ── School Name & Tagline ──
+            if (s.name) {
+                document.querySelectorAll('[data-i18n="schoolName"]').forEach(el => el.textContent = s.name);
+                T.en.schoolName = s.name; T.hi.schoolName = s.name; T.te.schoolName = s.name;
+                document.title = s.name + (s.tagline ? ' — ' + s.tagline : '');
+            }
+            if (s.tagline) {
+                document.querySelectorAll('[data-i18n="schoolTagline"]').forEach(el => el.textContent = s.tagline);
+                T.en.schoolTagline = s.tagline; T.hi.schoolTagline = s.tagline; T.te.schoolTagline = s.tagline;
+                // Update footer description
+                const footerDesc = `${s.name || 'School'} — ${s.tagline}. ${s.board || 'CBSE'} Affiliated · Est. ${s.estd || ''} · ${(c.address || {}).city || ''}`;
+                document.querySelectorAll('[data-i18n="footerDesc"]').forEach(el => el.textContent = footerDesc);
+            }
+            if (s.emoji) {
+                document.querySelectorAll('.logo-icon').forEach(el => el.textContent = s.emoji);
+            }
+            if (s.affNo) {
+                document.querySelector('.footer-bottom span:last-child') && (document.querySelector('.footer-bottom span:last-child').textContent = s.board + ' Affiliation No. ' + s.affNo);
+                T.en.heroBadge = `🏅 ${s.board || 'CBSE'} Affiliated · School No. ${s.affNo}`;
+            }
+
+            // ── Contact & Address ──
+            const addr = c.address || {};
+            if (addr.street) {
+                const fullAddr = [addr.street, addr.area, addr.city].filter(Boolean).join(', ') + (addr.state ? ', ' + addr.state : '') + (addr.pin ? ' – ' + addr.pin : '');
+                document.querySelectorAll('[data-i18n="addressVal"]').forEach(el => el.innerHTML = fullAddr);
+                T.en.addressVal = fullAddr;
+            }
+            const phones = c.phones || {};
+            if (phones.main) {
+                document.querySelectorAll('.footer-links').forEach(ul => {
+                    ul.querySelectorAll('a').forEach(a => {
+                        if (a.textContent.startsWith('📞')) a.textContent = '📞 ' + phones.main;
+                    });
+                });
+                // Update contact section phone
+                const phoneCard = document.querySelector('.c-card:nth-child(2) p');
+                if (phoneCard) phoneCard.innerHTML = phones.main + (phones.admissions ? '<br>Admissions: ' + phones.admissions : '');
+            }
+            const emails = c.emails || {};
+            if (emails.general) {
+                document.querySelectorAll('.footer-links').forEach(ul => {
+                    ul.querySelectorAll('a').forEach(a => {
+                        if (a.textContent.startsWith('✉️')) a.textContent = '✉️ ' + emails.general;
+                    });
+                });
+                const emailCard = document.querySelector('.c-card:nth-child(3) p');
+                if (emailCard) emailCard.innerHTML = emails.general + (emails.admissions ? '<br>' + emails.admissions : '');
+            }
+            const hours = c.hours || {};
+            if (hours.weekday) {
+                const hoursVal = `Mon–Fri: ${hours.weekday}` + (hours.saturday ? ` · Sat: ${hours.saturday}` : '');
+                document.querySelectorAll('[data-i18n="officeHoursVal"]').forEach(el => el.textContent = hoursVal);
+                T.en.officeHoursVal = hoursVal;
+            }
+            if (addr.mapLink) {
+                document.querySelectorAll('[onclick*="maps.google"]').forEach(el => el.setAttribute('onclick', `window.open('${addr.mapLink}')`));
+                const mapLabel = `Google Maps — ${s.name || 'School'}, ${addr.area || addr.city || ''}`;
+                document.querySelectorAll('[data-i18n="mapLabel"]').forEach(el => el.textContent = mapLabel);
+                T.en.mapLabel = mapLabel;
+            }
+
+            // ── Stats Bar ──
+            const statNums2 = document.querySelectorAll('.stat-num[data-target]');
+            if (st.students && statNums2[0]) { statNums2[0].dataset.target = parseInt(st.students); }
+            if (st.faculty && statNums2[1]) { statNums2[1].dataset.target = parseInt(st.faculty); }
+            if (st.years && statNums2[2]) { statNums2[2].dataset.target = parseInt(st.years); statNums2[2].dataset.suffix = ''; }
+            if (st.passRate && statNums2[3]) {
+                const pr = parseFloat(st.passRate);
+                statNums2[3].dataset.target = Math.floor(pr);
+                statNums2[3].dataset.suffix = (st.passRate.includes('.') ? '.' + st.passRate.split('.')[1] : '') + '%';
+            }
+            // Counter strip
+            const countNums = document.querySelectorAll('.count-num');
+            if (st.students && countNums[0]) countNums[0].dataset.target = parseInt(st.students);
+            if (st.faculty && countNums[1]) countNums[1].dataset.target = parseInt(st.faculty);
+            if (st.years && countNums[2]) countNums[2].dataset.target = parseInt(st.years);
+            if (st.alumni && countNums[3]) countNums[3].dataset.target = parseInt(st.alumni);
+            if (st.awards && countNums[4]) countNums[4].dataset.target = parseInt(st.awards);
+            if (st.passRate && countNums[5]) countNums[5].dataset.target = Math.floor(parseFloat(st.passRate));
+
+            // ── Principal ──
+            if (p.name) {
+                document.querySelectorAll('[data-i18n="principalName"]').forEach(el => el.textContent = p.name);
+                T.en.principalName = p.name;
+                // Footer / principal card name
+                document.querySelectorAll('.p-msg h3').forEach(el => el.textContent = p.name);
+            }
+            if (p.designation) {
+                document.querySelectorAll('[data-i18n="principalTitle"]').forEach(el => el.textContent = p.designation + ', ' + (s.name || 'School'));
+                document.querySelectorAll('.p-msg .title').forEach(el => el.textContent = p.designation + ', ' + (s.name || 'School'));
+            }
+            if (p.message) {
+                document.querySelectorAll('[data-i18n="principalMsg"]').forEach(el => el.textContent = '"' + p.message + '"');
+                document.querySelectorAll('.p-msg blockquote').forEach(el => el.textContent = '"' + p.message + '"');
+                T.en.principalMsg = '"' + p.message + '"';
+            }
+
+            // ── About / History ──
+            if (ab.history1) {
+                document.querySelectorAll('[data-i18n="aboutP1"]').forEach(el => el.textContent = ab.history1);
+                T.en.aboutP1 = ab.history1;
+            }
+            if (ab.history2) {
+                document.querySelectorAll('[data-i18n="aboutP2"]').forEach(el => el.textContent = ab.history2);
+                T.en.aboutP2 = ab.history2;
+            }
+            if (ab.history3) {
+                document.querySelectorAll('[data-i18n="aboutP3"]').forEach(el => el.textContent = ab.history3);
+                T.en.aboutP3 = ab.history3;
+            }
+            if (ab.vision) {
+                document.querySelectorAll('[data-i18n="visionText"]').forEach(el => el.textContent = ab.vision);
+                T.en.visionText = ab.vision;
+            }
+            if (ab.mission) {
+                document.querySelectorAll('[data-i18n="missionText"]').forEach(el => el.textContent = ab.mission);
+                T.en.missionText = ab.mission;
+            }
+
+            // ── Branding — Colors & Fonts ──
+            if (br.primaryColor) {
+                const root = document.documentElement;
+                root.style.setProperty('--navy', br.primaryColor);
+                root.style.setProperty('--gold', br.accent || '#e07a5f');
+                root.style.setProperty('--gold2', br.highlight || '#f4a261');
+                root.style.setProperty('--red', br.alert || '#c1440e');
+                if (br.primaryDark) root.style.setProperty('--navy2', br.primaryDark);
+                if (br.bg) { root.style.setProperty('--cream', br.bg); document.body.style.background = br.bg; }
+                if (br.text) root.style.setProperty('--text', br.text);
+            }
+            if (br.headingFont) {
+                const fontLink = document.createElement('link');
+                fontLink.rel = 'stylesheet';
+                fontLink.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(br.headingFont)}:wght@400;700;900&display=swap`;
+                document.head.appendChild(fontLink);
+                document.documentElement.style.setProperty('--font-d', `'${br.headingFont}', serif`);
+            }
+            if (br.bodyFont) {
+                const fontLink2 = document.createElement('link');
+                fontLink2.rel = 'stylesheet';
+                fontLink2.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(br.bodyFont)}:wght@300;400;500;600&display=swap`;
+                document.head.appendChild(fontLink2);
+                document.documentElement.style.setProperty('--font-b', `'${br.bodyFont}', sans-serif`);
+            }
+
+            // ── Ticker Text ──
+            if (br.ticker) {
+                const parts = br.ticker.split('•').map(s => s.trim()).filter(Boolean);
+                const tickerTrack = document.getElementById('ticker-track');
+                if (tickerTrack && parts.length) {
+                    tickerTrack.innerHTML = [...parts, ...parts].map(p => `<span>${p}</span>`).join('');
+                }
+            }
+
+            // ── Announcement Banner ──
+            if (br.banner) {
+                document.querySelectorAll('[data-i18n="noticeStrip"]').forEach(el => el.textContent = br.banner);
+                T.en.noticeStrip = br.banner;
+            }
+
+            // ── Fee Table ──
+            if (data.feeRows && data.feeRows.length) {
+                const feeBody = document.querySelector('.fee-table tbody');
+                if (feeBody) {
+                    const rows = data.feeRows.filter(r => r.class);
+                    if (rows.length) {
+                        feeBody.innerHTML = rows.map(r => `
+                        <tr>
+                            <td>${r.class}</td>
+                            <td>${r.tuition ? '₹' + parseInt(r.tuition).toLocaleString('en-IN') : '—'}</td>
+                            <td>${r.dev ? '₹' + parseInt(r.dev).toLocaleString('en-IN') : '—'}</td>
+                            <td>${r.transport ? '₹' + parseInt(r.transport).toLocaleString('en-IN') : '—'}</td>
+                            <td>${r.total ? '₹' + parseInt(r.total).toLocaleString('en-IN') : '—'}</td>
+                        </tr>`).join('');
+                    }
+                }
+            }
+
+            // ── Notices ──
+            if (data.notices && data.notices.length) {
+                const noticeList = document.getElementById('notice-list');
+                if (noticeList) {
+                    const validNotices = data.notices.filter(n => n.title);
+                    if (validNotices.length) {
+                        const typeClasses = { event: 'pill-event', exam: 'pill-exam', holiday: 'pill-holiday', urgent: 'pill-urgent' };
+                        const pillLabels = { event: 'Event', exam: 'Exam', holiday: 'Holiday', urgent: 'Urgent' };
+                        noticeList.innerHTML = validNotices.map(n => {
+                            let day = '--', mon = '---';
+                            if (n.date) {
+                                const d = new Date(n.date);
+                                day = d.getDate().toString().padStart(2, '0');
+                                mon = d.toLocaleString('en', { month: 'short' }).toUpperCase();
+                            }
+                            const isUrgent = n.type === 'urgent';
+                            return `<div class="notice-item ${isUrgent ? 'urgent' : ''}">
+                                <div class="n-date"><div class="day">${day}</div><div class="mon">${mon}</div></div>
+                                <div class="n-content">
+                                    <h4>${n.title}</h4>
+                                    <p>${n.details || ''}</p>
+                                    <div class="pills"><span class="pill ${typeClasses[n.type] || 'pill-event'}">${pillLabels[n.type] || 'Event'}</span></div>
+                                </div>
+                            </div>`;
+                        }).join('');
+                    }
+                }
+            }
+
+            // ── Upcoming Events (sidebar) ──
+            if (data.events && data.events.length) {
+                const evItems = document.querySelectorAll('.ev-item');
+                const validEvents = data.events.filter(e => e.name);
+                validEvents.forEach((ev, i) => {
+                    if (evItems[i]) {
+                        const span = evItems[i].querySelector('span:last-child');
+                        if (span) {
+                            const dateStr = ev.date ? ' — ' + new Date(ev.date).toLocaleDateString('en-IN', { day:'numeric', month:'short' }) : '';
+                            span.textContent = ev.name + dateStr;
+                        }
+                    }
+                });
+                // Update calendar event days
+                if (validEvents.length) {
+                    const newEventDays = {};
+                    validEvents.forEach(ev => { if (ev.date) { const d = new Date(ev.date); newEventDays[d.getDate()] = true; } });
+                    Object.assign(eventDays, newEventDays);
+                    renderCal();
+                }
+            }
+
+            // ── Faculty ──
+            if (data.faculty && data.faculty.length) {
+                const facGrid = document.getElementById('faculty-grid');
+                if (facGrid) {
+                    const validFac = data.faculty.filter(f => f.name);
+                    if (validFac.length) {
+                        const emojis = ['👩‍🏫', '👨‍🏫', '👨‍🔬', '👩‍🔬', '👨‍💻', '👩‍💻', '👨‍🎨', '👩‍🎓'];
+                        facGrid.innerHTML = validFac.map((f, i) => `
+                        <div class="fac-card">
+                            <div class="fac-avatar">${emojis[i % emojis.length]}</div>
+                            <div class="fac-info">
+                                <h4>${f.name}</h4>
+                                <div class="sub">${f.subject}</div>
+                                <div class="dept-lbl">${[f.qual, f.exp].filter(Boolean).join(' · ') || f.designation || 'Faculty'}</div>
+                            </div>
+                        </div>`).join('');
+                    }
+                }
+            }
+
+            // ── Admissions info ──
+            if (adm.year) {
+                document.querySelectorAll('[data-i18n="admTitle"]').forEach(el => {
+                    el.innerHTML = `Admissions ${adm.year} <span class="sta-badge">📄 Static</span>`;
+                });
+            }
+            if (adm.lastDate) {
+                const ld = new Date(adm.lastDate);
+                const ldStr = ld.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+                document.querySelectorAll('[data-i18n="noticeStrip"]').forEach(el => {
+                    if (!br.banner) el.innerHTML = `<strong>Admission ${adm.year || ''}:</strong> Last date to submit forms is <strong>${ldStr}.</strong>`;
+                });
+            }
+
+            // ── Show sync indicator ──
+            showSyncBadge();
+        }
+
+        function showSyncBadge() {
+            let badge = document.getElementById('sync-badge');
+            if (!badge) {
+                badge = document.createElement('div');
+                badge.id = 'sync-badge';
+                badge.style.cssText = 'position:fixed;bottom:1.5rem;left:1.5rem;background:linear-gradient(135deg,#2d6a4f,#52796f);color:#fff;padding:.55rem 1.1rem;border-radius:30px;font-size:.75rem;font-weight:700;z-index:9999;box-shadow:0 4px 20px rgba(45,106,79,.4);transition:all .3s;display:flex;align-items:center;gap:.5rem;font-family:inherit';
+                document.body.appendChild(badge);
+            }
+            badge.innerHTML = '⚡ Live data applied — ' + new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+            badge.style.opacity = '1';
+            badge.style.transform = 'translateY(0)';
+            clearTimeout(badge._timer);
+            badge._timer = setTimeout(() => { badge.style.opacity = '0'; badge.style.transform = 'translateY(10px)'; }, 4000);
+        }
+
+        // Load on page open
+        window.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('schoolLiveData');
+            if (saved) {
+                try { applySchoolData(JSON.parse(saved)); } catch(e) { console.warn('Live sync parse error', e); }
+            }
+        });
+
+        // Listen for live updates from Sample.html (cross-tab via storage event)
+        window.addEventListener('storage', e => {
+            if (e.key === 'schoolLiveData' && e.newValue) {
+                try { applySchoolData(JSON.parse(e.newValue)); } catch(e2) {}
+            }
+        });
+    </script>
+</body>
+
+</html>
